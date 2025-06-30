@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제11장: 성장을 위한 기초 영양 (영유아기부터 청소년기까지)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="growth" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="5" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="12" cy="15" r="3" fill="rgba(255,255,255,0.15)"/><circle cx="20" cy="10" r="4" fill="rgba(255,255,255,0.1)"/><path d="M5,20 Q12,15 20,10" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23growth)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #9b59b6;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #8e44ad;
+        }
+        
+        .paragraph {
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+        
+        .medical-term {
+            color: #9b59b6;
+            font-weight: 600;
+            border-bottom: 2px dotted #9b59b6;
+            cursor: help;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(142, 68, 173, 0.05) 100%);
+            border-left: 4px solid #9b59b6;
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin: 40px 0;
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 15px;
+        }
+        
+        .nutrition-timeline {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.05) 0%, rgba(142, 68, 173, 0.02) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .timeline-stages {
+            display: grid;
+            gap: 25px;
+        }
+        
+        .stage {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #9b59b6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stage:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.2);
+        }
+        
+        .stage-age {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+        
+        .stage-focus {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .stage-description {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .foods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .food-category {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .food-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .food-category.ideal {
+            border-color: #27ae60;
+        }
+        
+        .food-category.avoid {
+            border-color: #e74c3c;
+        }
+        
+        .food-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .food-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .food-name.ideal {
+            color: #27ae60;
+        }
+        
+        .food-name.avoid {
+            color: #e74c3c;
+        }
+        
+        .food-description {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .action-points-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+        }
+        
+        .action-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .action-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(142, 68, 173, 0.05) 100%);
+            border: 2px solid #9b59b6;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 20px;
+        }
+        
+        .navigation {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .book-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .foods-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제4부 생애주기 최적화 가이드</div>
+            <div class="chapter-number">제11장</div>
+            <div class="chapter-title">성장을 위한 기초 영양</div>
+            <div class="chapter-subtitle">영유아기부터 청소년기까지</div>
+        </div>
+        
+        <div class="content">
+            <h2 class="section-title">건강한 대사 프로그래밍의 중요성</h2>
+            
+            <p class="paragraph">
+                평생의 대사 건강은 성장기에 그 토대가 마련됩니다. 이 시기에 형성된 식습관과 대사 환경은 성인이 된 후의 건강에 지대한 영향을 미칩니다. 따라서 이 시기에는 <span class="medical-term">뇌와 신체 발달에 필수적인 영양소</span>를 최우선으로 공급해야 합니다.
+            </p>
+            
+            <div class="key-insight">
+                <div class="insight-title">평생 건강의 투자</div>
+                <p>영양 밀도가 높은 계란 노른자, 부드럽게 조리하여 으깬 고기, 아보카도, 버터와 같은 자연 식품을 적극적으로 도입하는 것이 바람직합니다. 이는 아이가 평생 건강한 미각과 대사 시스템을 갖추도록 프로그래밍하는 가장 중요한 투자입니다.</p>
+            </div>
+            
+            <h2 class="section-title">성장기별 영양 전략</h2>
+            
+            <div class="nutrition-timeline">
+                <h3 class="timeline-title">📈 생애주기별 영양 우선순위</h3>
+                
+                <div class="timeline-stages">
+                    <div class="stage">
+                        <div class="stage-age">0-6개월 (모유수유기)</div>
+                        <div class="stage-focus">완전 모유수유 권장</div>
+                        <div class="stage-description">
+                            모유는 완벽한 영양을 제공하며, 면역 체계 발달과 장내 미생물 정착에 필수적입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="stage">
+                        <div class="stage-age">6-12개월 (이유식 시작)</div>
+                        <div class="stage-focus">영양 밀도 높은 자연 식품 도입</div>
+                        <div class="stage-description">
+                            계란 노른자, 부드럽게 조리한 고기, 간 페이스트, 아보카도, 버터 등을 우선 도입합니다.
+                        </div>
+                    </div>
+                    
+                    <div class="stage">
+                        <div class="stage-age">1-3세 (유아기)</div>
+                        <div class="stage-focus">건강한 식습관 형성</div>
+                        <div class="stage-description">
+                            가족과 함께 식사하며 건강한 식습관을 모델링합니다. 이 시기의 식습관이 평생을 좌우합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">성장기 식품 가이드</h2>
+            
+            <div class="foods-grid">
+                <div class="food-category ideal">
+                    <div class="food-icon">🥩</div>
+                    <h4 class="food-name ideal">동물성 단백질</h4>
+                    <p class="food-description">
+                        쇠고기, 돼지고기, 닭고기, 생선, 계란 등. 성장에 필수적인 완전 단백질과 비타민 B12를 제공합니다.
+                    </p>
+                </div>
+                
+                <div class="food-category ideal">
+                    <div class="food-icon">🧈</div>
+                    <h4 class="food-name ideal">건강한 지방</h4>
+                    <p class="food-description">
+                        버터, 아보카도, 올리브오일. 뇌 발달과 호르몬 생성에 필수적인 포화지방을 공급합니다.
+                    </p>
+                </div>
+                
+                <div class="food-category avoid">
+                    <div class="food-icon">🍪</div>
+                    <h4 class="food-name avoid">가공식품</h4>
+                    <p class="food-description">
+                        과자, 사탕, 시리얼 등. 설탕과 정제 곡물이 포함된 모든 가공식품을 완전히 배제해야 합니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">이유식 시작 시 계란 노른자와 부드럽게 조리한 고기를 우선 도입하기</li>
+                    <li class="action-item">모든 가공식품과 유아용 시리얼을 완전히 제거하기</li>
+                    <li class="action-item">과일 주스 대신 물과 자연 상태의 과일 제공하기</li>
+                    <li class="action-item">주 1-2회 내장육을 아이 식단에 소량 포함시키기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제11장 핵심 요약</div>
+                <p>성장기는 평생 대사 건강의 토대를 마련하는 결정적 시기입니다. 뇌 발달에 필수적인 영양 밀도 높은 동물성 식품을 우선 공급하고, 설탕과 가공 곡물을 철저히 배제해야 합니다. 이유식부터 자연 식품 위주로 구성하여 건강한 미각과 대사 시스템을 프로그래밍하는 것이 평생 건강을 위한 가장 중요한 투자입니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-button" onclick="location.href='metabolic_health_chapter10.html'">◀ 제10장</button>
+            <span>제11장 / 총 16장</span>
+            <button class="nav-button" onclick="location.href='metabolic_health_chapter12.html'">제12장 ▶</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제3장: 만성 염증과 당화 - 노화와 질병의 가속기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="fire" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10,2 Q5,8 10,15 Q15,8 10,2" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="8" r="2" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23fire)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .navigation {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            background: #white;
+            color: #495057;
+            border: 2px solid #dee2e6;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .nav-button:hover, .nav-button.active {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-color: #fd79a8;
+            transform: translateY(-2px);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .twin-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .destroyer-panel {
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .destroyer-panel.inflammation {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+        }
+        
+        .destroyer-panel.glycation {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            color: white;
+        }
+        
+        .destroyer-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .destroyer-icon {
+            font-size: 3rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .destroyer-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .destroyer-subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .destroyer-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        
+        .process-flow {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .flow-steps {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .flow-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .flow-number.inflammation {
+            background: #c0392b;
+        }
+        
+        .flow-number.glycation {
+            background: #d68910;
+        }
+        
+        .flow-text {
+            flex: 1;
+            font-weight: 600;
+        }
+        
+        .comparison-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .comparison-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        
+        .vs-diagram {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .vs-side {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .vs-side.good {
+            border: 3px solid #27ae60;
+        }
+        
+        .vs-side.bad {
+            border: 3px solid #e74c3c;
+        }
+        
+        .vs-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .vs-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .vs-title.good {
+            color: #27ae60;
+        }
+        
+        .vs-title.bad {
+            color: #e74c3c;
+        }
+        
+        .vs-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+        
+        .vs-separator {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e74c3c;
+            padding: 20px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .biological-age {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .bio-age-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        
+        .age-equation {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .equation-text {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            opacity: 0.9;
+        }
+        
+        .equation-formula {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .damage-showcase {
+            margin: 40px 0;
+        }
+        
+        .damage-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        
+        .damage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .damage-item {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .damage-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.3);
+        }
+        
+        .damage-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .damage-organ {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .damage-effect {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .food-sources {
+            margin: 40px 0;
+        }
+        
+        .sources-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #e74c3c;
+        }
+        
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .source-category {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 3px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+        
+        .source-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.2);
+        }
+        
+        .source-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .source-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .source-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .source-tag {
+            background: #e74c3c;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .prevention-tips {
+            margin: 40px 0;
+        }
+        
+        .tips-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #27ae60;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .tip-card {
+            background: linear-gradient(135deg, #d5f4e6 0%, #c8e6c9 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(39, 174, 96, 0.2);
+        }
+        
+        .tip-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .tip-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .tip-text {
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .footer-navigation {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #e9ecef;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-link {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-link.contents {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-button {
+                width: 200px;
+            }
+            
+            .twin-comparison {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .vs-diagram {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .vs-separator {
+                transform: rotate(90deg);
+            }
+            
+            .sources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .damage-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .footer-navigation {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">염증과 당화</h1>
+            <p class="subtitle">전신적 손상의 쌍두마차 - 보이지 않는 파괴자들</p>
+        </div>
+        
+        <div class="navigation">
+            <div class="nav-buttons">
+                <button class="nav-button active" data-section="overview">🔍 개요</button>
+                <button class="nav-button" data-section="mechanisms">⚙️ 작동 원리</button>
+                <button class="nav-button" data-section="damage">💥 전신 손상</button>
+                <button class="nav-button" data-section="sources">🍔 원인 식품</button>
+                <button class="nav-button" data-section="prevention">🛡️ 예방법</button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- 개요 섹션 -->
+            <div class="section active" id="overview">
+                <div class="twin-comparison">
+                    <div class="destroyer-panel inflammation">
+                        <div class="destroyer-header">
+                            <div class="destroyer-icon inflammation">🔥</div>
+                            <div class="destroyer-title">
+                                <h2 class="destroyer-name inflammation">만성 염증</h2>
+                                <p class="destroyer-subtitle">Chronic Inflammation</p>
+                            </div>
+                        </div>
+                        <p class="destroyer-description">
+                            급성 염증은 상처 치유와 같이 우리 몸에 필수적인 방어 반응이지만, 만성적인 저강도 염증은 조직을 서서히 파괴하는 '보이지 않는 불길'과 같습니다.
+                        </p>
+                        <div class="process-flow">
+                            <div class="flow-steps">
+                                <div class="flow-step">
+                                    <div class="flow-number inflammation">1</div>
+                                    <div class="flow-text">가공식품 및 정제 탄수화물 섭취</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number inflammation">2</div>
+                                    <div class="flow-text">염증성 경로 활성화</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number inflammation">3</div>
+                                    <div class="flow-text">활성산소(ROS) 생성 증가</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number inflammation">4</div>
+                                    <div class="flow-text">전신 조직 손상 축적</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="destroyer-panel glycation">
+                        <div class="destroyer-header">
+                            <div class="destroyer-icon glycation">🍯</div>
+                            <div class="destroyer-title">
+                                <h2 class="destroyer-name glycation">당화 반응</h2>
+                                <p class="destroyer-subtitle">Glycation & AGEs</p>
+                            </div>
+                        </div>
+                        <p class="destroyer-description">
+                            혈액 속의 과도한 당 분자가 효소의 도움 없이 단백질이나 지방에 비정상적으로 달라붙는 화학 반응. '당독소'라고도 불리는 AGEs를 생성합니다.
+                        </p>
+                        <div class="process-flow">
+                            <div class="flow-steps">
+                                <div class="flow-step">
+                                    <div class="flow-number glycation">1</div>
+                                    <div class="flow-text">과도한 혈당 상승</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number glycation">2</div>
+                                    <div class="flow-text">당 분자의 단백질/지방 결합</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number glycation">3</div>
+                                    <div class="flow-text">AGEs (당독소) 형성</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="flow-number glycation">4</div>
+                                    <div class="flow-text">조직에 영구 축적</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-section">
+                    <h2 class="comparison-title">🆚 급성 염증 vs 만성 염증</h2>
+                    <div class="vs-diagram">
+                        <div class="vs-side good">
+                            <div class="vs-icon">⚡</div>
+                            <h3 class="vs-title good">급성 염증</h3>
+                            <p class="vs-description">
+                                상처 치유, 감염 방어 등 우리 몸에 필수적인 방어 반응입니다. 짧은 기간 동안 활성화되어 문제를 해결한 후 자연스럽게 종료됩니다.
+                            </p>
+                        </div>
+                        
+                        <div class="vs-separator">VS</div>
+                        
+                        <div class="vs-side bad">
+                            <div class="vs-icon">🔥</div>
+                            <h3 class="vs-title bad">만성 염증</h3>
+                            <p class="vs-description">
+                                저강도로 오랜 기간 지속되는 염증으로, 조직을 서서히 파괴합니다. 심혈관 질환, 당뇨병, 암, 치매 등의 원인이 됩니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 작동 원리 섹션 -->
+            <div class="section" id="mechanisms">
+                <div class="biological-age">
+                    <h2 class="bio-age-title">🧬 마이야르 반응: 몸 안에서 일어나는 요리 과정</h2>
+                    
+                    <div class="age-equation">
+                        <div class="equation-text">
+                            당화(Glycation)는 프랑스 화학자 루이-카미유 마이야르의 이름을 딴 '마이야르 반응'과 동일한 과정입니다.
+                        </div>
+                        <div class="equation-formula">
+                            음식 조리 시: 당 + 단백질 + 열 = 갈색 변화 + 풍미
+                        </div>
+                        <div class="equation-formula">
+                            체내에서: 혈당 + 체단백질 = AGEs (당독소)
+                        </div>
+                        <div class="equation-text">
+                            문제는 이 반응이 우리 몸 안에서도 일어난다는 것입니다!
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="damage-showcase">
+                    <h2 class="damage-title">AGEs가 일으키는 생체 손상 과정</h2>
+                    <div class="damage-grid">
+                        <div class="damage-item">
+                            <div class="damage-icon">🥩</div>
+                            <div class="damage-organ">단백질 변성</div>
+                            <div class="damage-effect">콜라겐, 엘라스틴 등 중요 단백질의 구조 변화</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">🔗</div>
+                            <div class="damage-organ">교차 결합</div>
+                            <div class="damage-effect">단백질 섬유들이 비정상적으로 연결되어 경직</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">🧱</div>
+                            <div class="damage-organ">조직 경화</div>
+                            <div class="damage-effect">유연성 상실, 탄성 감소, 기능 저하</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">⚡</div>
+                            <div class="damage-organ">염증 유발</div>
+                            <div class="damage-effect">AGEs 자체가 염증 반응을 촉진</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 전신 손상 섹션 -->
+            <div class="section" id="damage">
+                <div class="damage-showcase">
+                    <h2 class="damage-title">💥 염증과 당화가 전신에 미치는 파괴적 영향</h2>
+                    <div class="damage-grid">
+                        <div class="damage-item">
+                            <div class="damage-icon">👵</div>
+                            <div class="damage-organ">피부</div>
+                            <div class="damage-effect">콜라겐 손상으로 주름, 탄력 상실, 노화 가속</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">❤️</div>
+                            <div class="damage-organ">혈관</div>
+                            <div class="damage-effect">동맥벽 경화, 혈관 탄성 상실, 고혈압</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">🧠</div>
+                            <div class="damage-organ">뇌</div>
+                            <div class="damage-effect">신경세포 손상, 치매 위험 증가</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">🦴</div>
+                            <div class="damage-organ">관절</div>
+                            <div class="damage-effect">연골 경직, 움직임 제한, 관절염</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">👁️</div>
+                            <div class="damage-organ">눈</div>
+                            <div class="damage-effect">백내장, 망막 손상, 시력 저하</div>
+                        </div>
+                        
+                        <div class="damage-item">
+                            <div class="damage-icon">🫘</div>
+                            <div class="damage-organ">신장</div>
+                            <div class="damage-effect">신장 기능 저하, 만성 신부전</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="biological-age">
+                    <h2 class="bio-age-title">⏰ 생물학적 나이의 실제 결정 요인</h2>
+                    
+                    <div class="age-equation">
+                        <div class="equation-text">
+                            염증과 당화는 우리의 생물학적 나이를 결정하는 핵심 요소입니다:
+                        </div>
+                        <div class="equation-formula">
+                            고염증/고당화 식단 = 가속된 노화
+                        </div>
+                        <div class="equation-formula">
+                            항염증/항당화 식단 = 늦춰진 노화
+                        </div>
+                        <div class="equation-text">
+                            매 끼니마다 우리는 노화를 가속할지, 늦출지를 선택하고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 원인 식품 섹션 -->
+            <div class="section" id="sources">
+                <div class="food-sources">
+                    <h2 class="sources-title">🚨 염증과 당화를 유발하는 주요 식품들</h2>
+                    
+                    <div class="sources-grid">
+                        <div class="source-category">
+                            <div class="source-icon">🍞</div>
+                            <h3 class="source-name">정제 탄수화물</h3>
+                            <div class="source-examples">
+                                <span class="source-tag">흰빵</span>
+                                <span class="source-tag">흰쌀</span>
+                                <span class="source-tag">과자</span>
+                                <span class="source-tag">시리얼</span>
+                                <span class="source-tag">국수</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-category">
+                            <div class="source-icon">🫗</div>
+                            <h3 class="source-name">산업용 종자유</h3>
+                            <div class="source-examples">
+                                <span class="source-tag">카놀라유</span>
+                                <span class="source-tag">옥수수유</span>
+                                <span class="source-tag">콩기름</span>
+                                <span class="source-tag">해바라기씨유</span>
+                                <span class="source-tag">마가린</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-category">
+                            <div class="source-icon">🍭</div>
+                            <h3 class="source-name">첨가당</h3>
+                            <div class="source-examples">
+                                <span class="source-tag">설탕</span>
+                                <span class="source-tag">고과당 시럽</span>
+                                <span class="source-tag">아가베</span>
+                                <span class="source-tag">청량음료</span>
+                                <span class="source-tag">과자류</span>
+                            </div>
+                        </div>
+                        
+                        <div class="source-category">
+                            <div class="source-icon">🍟</div>
+                            <h3 class="source-name">가공/튀김 식품</h3>
+                            <div class="source-examples">
+                                <span class="source-tag">튀김</span>
+                                <span class="source-tag">인스턴트식품</span>
+                                <span class="source-tag">가공육</span>
+                                <span class="source-tag">스낵류</span>
+                                <span class="source-tag">패스트푸드</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="biological-age">
+                    <h2 class="bio-age-title">🔥 AGEs의 이중 공급원</h2>
+                    
+                    <div class="age-equation">
+                        <div class="equation-text">
+                            AGEs는 두 가지 경로로 우리 몸에 유입됩니다:
+                        </div>
+                        <div class="equation-formula">
+                            내인성 AGEs = 체내 높은 혈당 + 단백질
+                        </div>
+                        <div class="equation-formula">
+                            외인성 AGEs = 고온 조리 식품 직접 섭취
+                        </div>
+                        <div class="equation-text">
+                            따라서 혈당 관리와 조리법 개선이 모두 중요합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 예방법 섹션 -->
+            <div class="section" id="prevention">
+                <div class="prevention-tips">
+                    <h2 class="tips-title">🛡️ 염증과 당화 손상 예방 전략</h2>
+                    
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <div class="tip-icon">🚫</div>
+                            <div class="tip-title">뺄셈의 힘</div>
+                            <div class="tip-text">정제 탄수화물, 설탕, 산업용 종자유를 식단에서 제거하는 것이 가장 강력한 예방법입니다.</div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">🥩</div>
+                            <div class="tip-title">자연 식품 위주</div>
+                            <div class="tip-text">가공되지 않은 자연 식품(고기, 생선, 계란, 채소)을 중심으로 한 식단 구성.</div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">🔥</div>
+                            <div class="tip-title">조리법 개선</div>
+                            <div class="tip-text">고온 튀김보다는 찜, 삶기, 구이 등 낮은 온도에서의 조리법 선택.</div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">🥬</div>
+                            <div class="tip-title">항산화 식품</div>
+                            <div class="tip-text">베리류, 녹색잎채소 등 항산화 성분이 풍부한 식품으로 활성산소 중화.</div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">⏰</div>
+                            <div class="tip-title">간헐적 단식</div>
+                            <div class="tip-text">시간제한 섭식으로 소화기관 휴식 시간을 확보하여 염증 감소.</div>
+                        </div>
+                        
+                        <div class="tip-card">
+                            <div class="tip-icon">💧</div>
+                            <div class="tip-title">충분한 수분</div>
+                            <div class="tip-text">깨끗한 물 충분히 마시기로 독소 배출과 세포 기능 최적화.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="biological-age">
+                    <h2 class="bio-age-title">🎯 핵심 메시지</h2>
+                    
+                    <div class="age-equation">
+                        <div class="equation-text">
+                            염증과 당화에 대한 이해는 식단 선택에 강력한 동기를 제공합니다.
+                        </div>
+                        <div class="equation-formula">
+                            케이크 한 조각 = 칼로리가 아닌 노화 가속 물질
+                        </div>
+                        <div class="equation-formula">
+                            자연 식품 선택 = 강력한 항노화 프로토콜
+                        </div>
+                        <div class="equation-text">
+                            매 끼니마다 우리는 생물학적 나이를 결정하는 선택을 하고 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-navigation">
+            <a href="metabolic_health_chapter3.html" class="nav-link">◀ 제3장으로</a>
+            <a href="metabolic_health_contents.html" class="nav-link contents">📚 목차</a>
+            <a href="metabolic_health_chapter4.html" class="nav-link">제4장 ▶</a>
+        </div>
+    </div>
+    
+    <script>
+        // 탭 네비게이션 기능
+        const navButtons = document.querySelectorAll('.nav-button');
+        const sections = document.querySelectorAll('.section');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetSection = button.getAttribute('data-section');
+                
+                // 모든 버튼과 섹션에서 active 클래스 제거
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // 클릭된 버튼과 해당 섹션에 active 클래스 추가
+                button.classList.add('active');
+                document.getElementById(targetSection).classList.add('active');
+            });
+        });
+        
+        // 페이지 로드 시 첫 번째 섹션 활성화
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSection = document.getElementById('overview');
+            const firstButton = document.querySelector('[data-section="overview"]');
+            
+            if (firstSection && firstButton) {
+                firstSection.classList.add('active');
+                firstButton.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

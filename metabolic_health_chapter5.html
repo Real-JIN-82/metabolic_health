@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제5장: 동물성 영양소의 우위성 - 원조 '슈퍼푸드'의 재발견</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="nutrition" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="3" fill="rgba(255,255,255,0.1)"/><path d="M10,15 L20,15" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><path d="M15,10 L15,20" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></pattern></defs><rect width="100" height="100" fill="url(%23nutrition)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .myth-buster {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .myth-buster::before {
+            content: '🔍';
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+        
+        .myth-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .myth-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #27ae60;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #2ecc71;
+        }
+        
+        .truth-reveal {
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            border: 2px solid #e67e22;
+        }
+        
+        .truth-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #d68910;
+            margin-bottom: 15px;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #8b5cf6;
+        }
+        
+        .insight-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 15px;
+        }
+        
+        .paragraph {
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+        
+        .medical-term {
+            color: #27ae60;
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dotted #27ae60;
+            position: relative;
+        }
+        
+        .medical-term:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .bioavailability-comparison {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #27ae60;
+        }
+        
+        .comparison-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #27ae60;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .nutrients-grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .nutrient-comparison {
+            border: 1px solid #ecf0f1;
+            border-radius: 15px;
+            padding: 25px;
+            background: #f8f9fa;
+        }
+        
+        .nutrient-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nutrient-icon {
+            font-size: 1.5rem;
+        }
+        
+        .source-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .source-side {
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .source-side.animal {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+        }
+        
+        .source-side.plant {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+        }
+        
+        .source-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .source-title.animal {
+            color: #2e7d32;
+        }
+        
+        .source-title.plant {
+            color: #f57c00;
+        }
+        
+        .source-content {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: #5f6368;
+        }
+        
+        .absorption-rate {
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .absorption-rate.high {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .absorption-rate.low {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .complete-nutrition {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            border: 2px solid #e91e63;
+        }
+        
+        .complete-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
+        
+        .complete-statement {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
+        
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin: 40px 0 25px 0;
+        }
+        
+        .organ-meats {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #e74c3c;
+        }
+        
+        .organs-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .organs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .organ-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .organ-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .organ-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #c53030;
+            margin-bottom: 15px;
+        }
+        
+        .organ-nutrients {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .nutrient-tag {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .organ-benefit {
+            font-size: 0.9rem;
+            color: #c53030;
+            font-weight: 600;
+        }
+        
+        .meat-quality-guide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #f39c12;
+        }
+        
+        .quality-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #f39c12;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .quality-comparison {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .quality-option {
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .quality-option.ideal {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+        }
+        
+        .quality-option.acceptable {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+        }
+        
+        .quality-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .quality-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .quality-name.ideal {
+            color: #2e7d32;
+        }
+        
+        .quality-name.acceptable {
+            color: #f57c00;
+        }
+        
+        .quality-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .quality-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .benefit-tag {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .benefit-tag.ideal {
+            background: #4caf50;
+        }
+        
+        .benefit-tag.acceptable {
+            background: #ff9800;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-item::before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-button:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .source-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .quality-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제2부: 최적의 인간 식단</div>
+            <div class="chapter-number">제 5 장</div>
+            <h1 class="chapter-title">동물성 영양소의 우위성</h1>
+            <div class="chapter-subtitle">원조 '슈퍼푸드'의 재발견</div>
+        </div>
+        
+        <div class="content">
+            <div class="myth-buster">
+                <div class="myth-title">60년간 지속된 영양학적 편견</div>
+                <div class="myth-content">
+                    현대 영양학계의 주류 담론은 종종 동물성 식품을 비판하고 식물성 식단을 이상적인 것으로 제시하지만, 이는 인간 생리학의 핵심을 간과한 주장일 수 있습니다. 과연 우리가 알고 있는 것이 전부일까요?
+                </div>
+            </div>
+            
+            <h2 class="section-title">영양 밀도와 생체이용률의 진실</h2>
+            
+            <div class="truth-reveal">
+                <div class="truth-title">동물성 식품: 인간을 위한 최적화된 영양소</div>
+                <p style="text-align: center; font-size: 1.1rem; margin-top: 10px;">
+                    에데 박사의 논지에 따르면, 동물성 식품은 인간에게 가장 영양 밀도가 높고 생체이용률이 우수한 영양소를 제공하는 '원조 슈퍼푸드'입니다.
+                </p>
+            </div>
+            
+            <div class="key-insight">
+                <div class="insight-title">생체이용률 (Bioavailability)의 중요성</div>
+                <p>식품에 특정 영양소가 포함되어 있다고 해서 우리 몸이 그 영양소를 반드시 흡수하고 활용할 수 있는 것은 아닙니다. 중요한 것은 실제로 우리 몸이 얼마나 효율적으로 이용할 수 있느냐입니다.</p>
+            </div>
+            
+            <div class="bioavailability-comparison">
+                <h3 class="comparison-title">🔬 동물성 vs 식물성 영양소 생체이용률 비교</h3>
+                
+                <div class="nutrients-grid">
+                    <div class="nutrient-comparison">
+                        <h4 class="nutrient-name">
+                            <span class="nutrient-icon">🩸</span>
+                            철분 (Iron)
+                        </h4>
+                        <div class="source-comparison">
+                            <div class="source-side animal">
+                                <div class="source-title animal">헤철 (Heme Iron)</div>
+                                <div class="source-content">붉은 육류, 내장육, 생선</div>
+                                <div class="absorption-rate high">흡수율: 15-35%</div>
+                            </div>
+                            <div class="source-side plant">
+                                <div class="source-title plant">비헤철 (Non-heme Iron)</div>
+                                <div class="source-content">시금치, 콩, 견과류</div>
+                                <div class="absorption-rate low">흡수율: 2-20%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nutrient-comparison">
+                        <h4 class="nutrient-name">
+                            <span class="nutrient-icon">🧠</span>
+                            비타민 B12
+                        </h4>
+                        <div class="source-comparison">
+                            <div class="source-side animal">
+                                <div class="source-title animal">즉시 사용 가능</div>
+                                <div class="source-content">육류, 생선, 계란, 유제품</div>
+                                <div class="absorption-rate high">100% 생체활성</div>
+                            </div>
+                            <div class="source-side plant">
+                                <div class="source-title plant">거의 존재하지 않음</div>
+                                <div class="source-content">발효식품에서 극소량</div>
+                                <div class="absorption-rate low">보충제 필수</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nutrient-comparison">
+                        <h4 class="nutrient-name">
+                            <span class="nutrient-icon">💪</span>
+                            단백질 (Protein)
+                        </h4>
+                        <div class="source-comparison">
+                            <div class="source-side animal">
+                                <div class="source-title animal">완전 단백질</div>
+                                <div class="source-content">모든 필수 아미노산 포함</div>
+                                <div class="absorption-rate high">높은 PDCAAS 점수</div>
+                            </div>
+                            <div class="source-side plant">
+                                <div class="source-title plant">불완전 단백질</div>
+                                <div class="source-content">일부 필수 아미노산 부족</div>
+                                <div class="absorption-rate low">조합 필요</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="nutrient-comparison">
+                        <h4 class="nutrient-name">
+                            <span class="nutrient-icon">⚡</span>
+                            아연 (Zinc)
+                        </h4>
+                        <div class="source-comparison">
+                            <div class="source-side animal">
+                                <div class="source-title animal">동물성 아연</div>
+                                <div class="source-content">굴, 붉은 육류, 내장육</div>
+                                <div class="absorption-rate high">흡수율: 40-60%</div>
+                            </div>
+                            <div class="source-side plant">
+                                <div class="source-title plant">식물성 아연</div>
+                                <div class="source-content">곡물, 콩류, 견과류</div>
+                                <div class="absorption-rate low">피트산으로 흡수 방해</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="complete-nutrition">
+                <h3 class="complete-title">🏆 영양학적 완전성의 증명</h3>
+                <div class="complete-statement">
+                    에데 박사는 이론적으로 일부 내장육을 포함하기만 하면, 동물성 식품만으로도 인간에게 필요한 모든 비타민과 미네랄을 얻을 수 있다고 주장합니다.
+                </div>
+                <p style="text-align: center; font-size: 1.1rem;">
+                    이는 동물성 식품이 영양학적으로 얼마나 완벽에 가까운지를 보여주는 강력한 증거입니다. 수천 년간 인간이 동물성 식품에 의존해온 것은 우연이 아닙니다.
+                </p>
+            </div>
+            
+            <h3 class="subsection-title">붉은 육류와 포화지방에 대한 오해 바로잡기</h3>
+            
+            <p class="paragraph">
+                붉은 육류와 포화지방에 대한 공포는 수십 년간 공중 보건 메시지의 중심에 있었지만, 이러한 주장의 대부분은 제1장에서 논의된 결함 있는 <span class="medical-term" title="역학 연구: 인구 집단에서 질병의 발생과 관련 요인을 연구하는 학문">역학 연구</span>에 뿌리를 두고 있습니다.
+            </p>
+            
+            <div class="key-insight">
+                <div class="insight-title">상관관계 vs 인과관계의 함정</div>
+                <p>상관관계를 인과관계로 오인한 결과, 영양학적으로 가장 우수한 식품군 중 하나가 부당하게 비난받아왔습니다. 진짜 문제는 포화지방 자체가 아니라, 정제 탄수화물 및 설탕과 함께 섭취될 때 발생하는 대사적 혼란입니다.</p>
+            </div>
+            
+            <p class="paragraph">
+                이 프레임워크에서는 붉은 육류를 위험 요소가 아닌, <strong>필수 아미노산, 비타민, 미네랄의 최고 공급원</strong>으로 재평가합니다. <span class="medical-term" title="포화지방: 화학적으로 안정적인 지방산으로, 세포막과 호르몬 생성에 필수적">포화지방</span> 역시 세포막의 구성, 호르몬 생성, 지용성 비타민 흡수에 필수적인 역할을 하는 중요한 영양소로 간주합니다.
+            </p>
+            
+            <h3 class="subsection-title">내장육: 진정한 슈퍼푸드</h3>
+            
+            <p class="paragraph">
+                현대인들은 대부분 근육 부위의 고기만 섭취하는 경향이 있지만, 전통적인 식문화에서는 동물의 모든 부위를 활용했습니다. 특히 간, 심장, 신장과 같은 내장육은 특정 영양소가 압도적으로 풍부한 진정한 '슈퍼푸드'입니다.
+            </p>
+            
+            <div class="organ-meats">
+                <h3 class="organs-title">🍖 내장육별 영양소 프로필</h3>
+                
+                <div class="organs-grid">
+                    <div class="organ-card">
+                        <div class="organ-icon">⭐</div>
+                        <h4 class="organ-name">간 (Liver)</h4>
+                        <div class="organ-nutrients">
+                            <span class="nutrient-tag">비타민 A</span>
+                            <span class="nutrient-tag">비타민 B12</span>
+                            <span class="nutrient-tag">엽산</span>
+                            <span class="nutrient-tag">철분</span>
+                            <span class="nutrient-tag">구리</span>
+                            <span class="nutrient-tag">콜린</span>
+                        </div>
+                        <div class="organ-benefit">자연계 최고의 종합 비타민</div>
+                    </div>
+                    
+                    <div class="organ-card">
+                        <div class="organ-icon">❤️</div>
+                        <h4 class="organ-name">심장 (Heart)</h4>
+                        <div class="organ-nutrients">
+                            <span class="nutrient-tag">코큐텐</span>
+                            <span class="nutrient-tag">타우린</span>
+                            <span class="nutrient-tag">비타민 B군</span>
+                            <span class="nutrient-tag">셀레늄</span>
+                            <span class="nutrient-tag">아연</span>
+                        </div>
+                        <div class="organ-benefit">심혈관 건강 최적화</div>
+                    </div>
+                    
+                    <div class="organ-card">
+                        <div class="organ-icon">🧠</div>
+                        <h4 class="organ-name">뇌 (Brain)</h4>
+                        <div class="organ-nutrients">
+                            <span class="nutrient-tag">DHA</span>
+                            <span class="nutrient-tag">콜레스테롤</span>
+                            <span class="nutrient-tag">콜린</span>
+                            <span class="nutrient-tag">비타민 B12</span>
+                            <span class="nutrient-tag">인지질</span>
+                        </div>
+                        <div class="organ-benefit">뇌 기능과 인지 능력 향상</div>
+                    </div>
+                    
+                    <div class="organ-card">
+                        <div class="organ-icon">💧</div>
+                        <h4 class="organ-name">신장 (Kidney)</h4>
+                        <div class="organ-nutrients">
+                            <span class="nutrient-tag">비타민 B12</span>
+                            <span class="nutrient-tag">리보플라빈</span>
+                            <span class="nutrient-tag">셀레늄</span>
+                            <span class="nutrient-tag">단백질</span>
+                            <span class="nutrient-tag">아연</span>
+                        </div>
+                        <div class="organ-benefit">해독과 신진대사 지원</div>
+                    </div>
+                </div>
+                
+                <div class="key-insight" style="margin-top: 30px;">
+                    <div class="insight-title">내장육의 영양 밀도</div>
+                    <p>식단에 소량의 내장육을 포함하는 것은 영양소 섭취를 극대화하고, 보충제의 필요성을 줄이는 가장 효과적인 방법 중 하나입니다. 주 1-2회, 30-50g 정도만 섭취해도 상당한 영양학적 이익을 얻을 수 있습니다.</p>
+                </div>
+            </div>
+            
+            <h2 class="section-title">육류 품질 선택 가이드</h2>
+            
+            <div class="meat-quality-guide">
+                <h3 class="quality-title">🌱 목축 방식에 따른 영양 차이</h3>
+                
+                <div class="quality-comparison">
+                    <div class="quality-option ideal">
+                        <div class="quality-icon">🐄</div>
+                        <h4 class="quality-name ideal">목초 사육 / 자연 방목</h4>
+                        <p class="quality-description">
+                            자연 환경에서 풀을 먹고 자란 동물의 고기는 영양학적으로 우수하며, 오메가-3 지방산 함량이 높고 오메가-6 비율이 낮습니다.
+                        </p>
+                        <div class="quality-benefits">
+                            <span class="benefit-tag ideal">높은 오메가-3</span>
+                            <span class="benefit-tag ideal">CLA 함유</span>
+                            <span class="benefit-tag ideal">비타민 E 풍부</span>
+                            <span class="benefit-tag ideal">항생제 무사용</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quality-option acceptable">
+                        <div class="quality-icon">🌾</div>
+                        <h4 class="quality-name acceptable">곡물 사육 / 일반 축산</h4>
+                        <p class="quality-description">
+                            곡물 사료로 키운 동물의 고기도 영양가가 높지만, 오메가-6 지방산 비율이 다소 높을 수 있습니다. 여전히 우수한 단백질 공급원입니다.
+                        </p>
+                        <div class="quality-benefits">
+                            <span class="benefit-tag acceptable">완전 단백질</span>
+                            <span class="benefit-tag acceptable">높은 생체이용률</span>
+                            <span class="benefit-tag acceptable">접근성 좋음</span>
+                            <span class="benefit-tag acceptable">경제적</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="key-insight" style="margin-top: 30px;">
+                    <div class="insight-title">실용적 조언</div>
+                    <p>목초 사육 고기가 이상적이지만, 일반 축산 고기도 식물성 단백질에 비해 압도적으로 우수합니다. 완벽한 것을 기다리며 좋은 것을 포기하지 마세요. 가능한 범위에서 최선의 선택을 하는 것이 중요합니다.</p>
+                </div>
+            </div>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">붉은 육류에 대한 두려움을 버리고 양질의 단백질 공급원으로 활용하기</li>
+                    <li class="action-item">주 1-2회 내장육(간, 심장 등) 소량 섭취로 영양소 밀도 극대화하기</li>
+                    <li class="action-item">계란을 완전 식품으로 인식하고 노른자까지 모두 섭취하기</li>
+                    <li class="action-item">지방이 많은 생선(연어, 정어리, 고등어) 정기적으로 섭취하기</li>
+                    <li class="action-item">가능한 범위에서 목초 사육이나 방목 동물성 식품 선택하기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제5장 핵심 요약</div>
+                <p>동물성 식품은 인간에게 가장 영양 밀도가 높고 생체이용률이 우수한 영양소를 제공합니다. 붉은 육류와 포화지방에 대한 공포는 결함 있는 연구에 기반한 것으로, 실제로는 필수적인 영양소입니다. 특히 내장육은 진정한 '슈퍼푸드'로, 소량 섭취만으로도 보충제를 대체할 수 있습니다. 동물성 식품은 완전한 영양을 제공하는 인간 최적화 식품입니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="chapter_04_brain_body_connection.html" class="nav-button">◀ 제4장</a>
+            <span>제5장 / 총 16장</span>
+            <a href="metabolic_health_chapter6.html" class="nav-button">제6장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

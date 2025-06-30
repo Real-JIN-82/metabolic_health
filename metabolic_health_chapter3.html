@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제3장: 만성 염증과 당화 - 노화와 질병의 가속기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="inflammation" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="3" fill="rgba(255,255,255,0.1)"/><path d="M10,10 L20,20" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><path d="M20,10 L10,20" stroke="rgba(255,255,255,0.1)" stroke-width="2"/><circle cx="15" cy="15" r="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23inflammation)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .inflammation-intro {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .inflammation-intro::before {
+            content: "🔥";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .intro-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .intro-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 40px 0 25px 0;
+            border-left: 5px solid #fd79a8;
+            padding-left: 20px;
+        }
+        
+        .paragraph {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .medical-term {
+            color: #fd79a8;
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dotted #fd79a8;
+            transition: all 0.3s ease;
+        }
+        
+        .medical-term:hover {
+            background: #fef7f7;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .damage-processes {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #e74c3c;
+            position: relative;
+        }
+        
+        .damage-processes::before {
+            content: "⚔️";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .processes-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #c0392b;
+            margin-bottom: 30px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .process-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .process-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid #e74c3c;
+            transition: transform 0.3s ease;
+        }
+        
+        .process-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.2);
+        }
+        
+        .process-card.glycation {
+            border-color: #f39c12;
+        }
+        
+        .process-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .process-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #c0392b;
+            margin-bottom: 15px;
+        }
+        
+        .process-card.glycation .process-name {
+            color: #d68910;
+        }
+        
+        .process-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+        
+        .aging-concept {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .aging-concept::before {
+            content: "🧬";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .aging-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .aging-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        .infographic-section {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .infographic-section::before {
+            content: "📊";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .infographic-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        
+        .infographic-description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .infographic-button {
+            background: white;
+            color: #fd79a8;
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .infographic-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: #fd79a8;
+        }
+        
+        .damage-sources {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #f39c12;
+            position: relative;
+        }
+        
+        .damage-sources::before {
+            content: "⚠️";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .sources-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #d68910;
+            margin-bottom: 25px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .sources-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .source-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .source-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .source-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .source-name {
+            font-weight: 600;
+            color: #d68910;
+            font-size: 0.9rem;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #17a2b8;
+            position: relative;
+        }
+        
+        .key-insight::before {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #138496;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #28a745;
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #155724;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            background: white;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .action-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .action-item::before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid #dee2e6;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #495057;
+            text-align: center;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: #fd79a8;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #fdcb6e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .process-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .sources-list {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .inflammation-intro, .damage-processes, .aging-concept, .damage-sources, .key-insight, .action-points, .infographic-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제1부: 대사적 현실의 토대</div>
+            <div class="chapter-number">제 3 장</div>
+            <h1 class="chapter-title">만성 염증과 당화 - 노화와 질병의 가속기</h1>
+            <div class="chapter-subtitle">보이지 않는 곳에서 진행되는 염증과 당화 과정이 우리 몸에 미치는 영향을 탐구합니다</div>
+        </div>
+        
+        <div class="content">
+            <div class="inflammation-intro">
+                <div class="intro-title">보이지 않는 불길</div>
+                <div class="intro-content">
+                    만성 염증과 당화 반응은 인슐린 저항성과 함께 우리 몸을 서서히 파괴하는 '보이지 않는 불길'입니다. 이들은 노화를 가속화하고 다양한 만성 질환의 토대가 됩니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">만성 염증: 조용한 파괴자</h2>
+            
+            <p class="paragraph">
+                급성 염증은 상처 치유와 같이 우리 몸에 필수적인 방어 반응이지만, <span class="medical-term" title="만성 염증: 장기간 지속되는 저강도 염증으로 조직을 서서히 손상시키는 상태">만성 염증</span>은 조직을 서서히 파괴하는 '보이지 않는 불길'과 같습니다.
+            </p>
+            
+            <p class="paragraph">
+                이러한 만성 염증의 주된 연료는 가공식품, 특히 정제된 탄수화물과 <span class="medical-term" title="산업용 종자유: 카놀라유, 옥수수유, 콩기름 등 오메가-6 지방산이 풍부한 기름">산업용 종자유(카놀라유, 옥수수유, 콩기름 등 오메가-6 지방산이 풍부한 기름)</span>입니다. 이들은 체내에서 염증성 경로를 활성화하고, 세포를 손상시키는 <span class="medical-term" title="활성산소: 세포를 손상시킬 수 있는 불안정한 산소 분자">활성산소(ROS)</span> 생성을 촉진합니다.
+            </p>
+            
+            <div class="damage-processes">
+                <div class="processes-title">두 가지 주요 손상 과정</div>
+                
+                <div class="process-comparison">
+                    <div class="process-card">
+                        <div class="process-icon">🔥</div>
+                        <div class="process-name">만성 염증</div>
+                        <div class="process-description">
+                            지속적인 염증성 물질 분비로 혈관벽, 관절, 뇌 조직 등을 서서히 손상시킵니다. 심혈관 질환, 관절염, 치매 등의 근본 원인이 됩니다.
+                        </div>
+                    </div>
+                    
+                    <div class="process-card glycation">
+                        <div class="process-icon">🍯</div>
+                        <div class="process-name">당화 반응 (AGEs)</div>
+                        <div class="process-description">
+                            과도한 혈당이 단백질과 결합하여 최종당화산물(AGEs)을 형성. 콜라겐을 경화시켜 주름을 유발하고, 혈관을 딱딱하게 만듭니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">당화 반응과 최종당화산물(AGEs)</h2>
+            
+            <p class="paragraph">
+                '당독소'라고도 불리는 <span class="medical-term" title="최종당화산물(AGEs): 단백질과 당분이 결합하여 형성되는 해로운 화합물">최종당화산물(Advanced Glycation End Products, AGEs)</span>은 우리 몸의 노화와 질병을 가속하는 또 다른 주범입니다.
+            </p>
+            
+            <p class="paragraph">
+                <span class="medical-term" title="당화 반응: 혈액 속 과도한 당 분자가 단백질이나 지방에 비정상적으로 달라붙는 화학 반응">당화(Glycation)</span>란, 혈액 속의 과도한 당 분자가 효소의 도움 없이 단백질이나 지방에 비정상적으로 달라붙는 화학 반응을 말합니다. 이 반응은 프랑스 화학자 루이-카미유 마이야르의 이름을 딴 '마이야르 반응'으로, 음식을 고온에서 조리할 때 갈색으로 변하며 풍미가 생기는 과정과 동일합니다.
+            </p>
+            
+            <div class="infographic-section">
+                <div class="infographic-title">🎯 시각적으로 이해하는 염증과 당화</div>
+                <div class="infographic-description">
+                    복잡한 염증과 당화 과정을 5개 섹션으로 나누어 인터랙티브하게 학습할 수 있는 대화형 인포그래픽으로 확인해보세요.
+                </div>
+                <a href="inflammation_glycation_infographic.html" class="infographic-button">
+                    📊 인포그래픽 보러가기
+                </a>
+            </div>
+            
+            <div class="aging-concept">
+                <div class="aging-title">🧬 생물학적 나이를 결정하는 식단</div>
+                <div class="aging-content">
+                    염증과 당화라는 개념은 식단 관리를 단순한 체중 조절의 차원을 넘어, <strong>생물학적 노화 속도를 직접 제어하는 행위</strong>로 격상시킵니다. 정제된 탄수화물을 최소화하고 가공되지 않은 자연 식품 위주로 구성된 식단은 단순히 '체중 감량 식단'이 아니라, 강력한 '항염증 및 항당화 프로토콜'입니다.
+                </div>
+            </div>
+            
+            <div class="damage-sources">
+                <div class="sources-title">손상 과정의 기질이 되는 주요 요소들</div>
+                
+                <div class="sources-list">
+                    <div class="source-item">
+                        <div class="source-icon">🍯</div>
+                        <div class="source-name">당과 정제 탄수화물</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-icon">🫗</div>
+                        <div class="source-name">염증 유발 종자유</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-icon">🔥</div>
+                        <div class="source-name">고온 조리 과정</div>
+                    </div>
+                    
+                    <div class="source-item">
+                        <div class="source-icon">⚗️</div>
+                        <div class="source-name">가공 첨가물</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="paragraph">
+                이러한 손상 과정의 기질이 되는 당과 정제 탄수화물을 최소화하고, 염증을 유발하는 산업용 종자유를 피함으로써, 우리는 이론적으로 생물학적 손상의 축적 속도를 늦출 수 있습니다.
+            </p>
+            
+            <div class="key-insight">
+                <div class="insight-title">새로운 관점의 식품 선택</div>
+                <p>이러한 관점은 식단 선택에 강력하고 장기적인 동기를 부여합니다. 케이크 한 조각은 단순히 '칼로리' 덩어리가 아니라, <strong>동맥을 경화시키고 피부 콜라겐을 손상시키는 염증과 당화 반응의 원료</strong>가 되는 것입니다.</p>
+            </div>
+            
+            <p class="paragraph">
+                이는 단기적인 목표를 초월하여 평생의 건강을 위한 전략적 선택의 중요성을 일깨워줍니다. 매 끼니마다 우리는 노화를 가속할지, 늦출지를 선택하고 있는 것입니다.
+            </p>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">주방에서 산업용 종자유(카놀라유, 옥수수유, 콩기름 등) 제거하고 버터, 코코넛오일, 올리브오일로 교체하기</li>
+                    <li class="action-item">가공식품 구매 전 성분표 확인하여 첨가당과 정제 탄수화물 함량 체크하기</li>
+                    <li class="action-item">고온 튀김 요리 빈도 줄이고, 찜, 삶기, 구이 위주로 조리법 변경하기</li>
+                    <li class="action-item">피부 상태, 관절 유연성 등 노화 지표들을 주기적으로 관찰하여 식단 효과 모니터링하기</li>
+                    <li class="action-item">외식 시 튀김류와 달콤한 소스가 많이 사용된 메뉴 피하기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제3장 핵심 요약</div>
+                <p>만성 염증과 당화 반응은 인슐린 저항성과 함께 현대인의 건강을 위협하는 핵심 메커니즘입니다. 이들은 보이지 않게 조직을 손상시키며 노화를 가속화합니다. 정제 탄수화물과 산업용 종자유를 피하고 자연 식품 위주의 식단을 선택하는 것은 단순한 다이어트가 아니라 생물학적 나이를 늦추는 강력한 항노화 전략입니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_chapter2.html" class="nav-button">◀ 제2장</a>
+            <span>제3장 / 총 16장</span>
+            <a href="metabolic_health_chapter4.html" class="nav-button">제4장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

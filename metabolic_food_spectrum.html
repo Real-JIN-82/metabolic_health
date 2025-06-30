@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대사 건강 식품 스펙트럼 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .spectrum-controls {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-tab {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+        
+        .filter-tab:hover {
+            background: #e8f5e8;
+            color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        .filter-tab.active {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+        
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #27ae60;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        }
+        
+        .spectrum-legend {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        .legend-color.optimal {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .legend-color.moderate {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+        
+        .legend-color.avoid {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        
+        .legend-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .category-section {
+            margin-bottom: 50px;
+        }
+        
+        .category-section.hidden {
+            display: none;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .food-level {
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .food-level.optimal {
+            background: linear-gradient(135deg, #d5f4e6 0%, #a3e9c8 100%);
+            border-color: #27ae60;
+        }
+        
+        .food-level.moderate {
+            background: linear-gradient(135deg, #fdeaa7 0%, #f6d55c 100%);
+            border-color: #f39c12;
+        }
+        
+        .food-level.avoid {
+            background: linear-gradient(135deg, #fadbd8 0%, #f1948a 100%);
+            border-color: #e74c3c;
+        }
+        
+        .food-level:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .level-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .level-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .level-icon.optimal {
+            background: #27ae60;
+        }
+        
+        .level-icon.moderate {
+            background: #f39c12;
+        }
+        
+        .level-icon.avoid {
+            background: #e74c3c;
+        }
+        
+        .level-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .level-title.optimal {
+            color: #27ae60;
+        }
+        
+        .level-title.moderate {
+            color: #e67e22;
+        }
+        
+        .level-title.avoid {
+            color: #e74c3c;
+        }
+        
+        .food-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .food-tag {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2c3e50;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .food-tag:hover {
+            background: white;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .level-note {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #34495e;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #7f8c8d;
+        }
+        
+        .warning-note {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .warning-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .practical-tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .tips-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .tip-text {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .navigation {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #e9ecef;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .spectrum-controls {
+                padding: 20px;
+            }
+            
+            .filter-tabs {
+                gap: 5px;
+            }
+            
+            .filter-tab {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .spectrum-legend {
+                gap: 15px;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">대사 건강 식품 스펙트럼</h1>
+            <p class="subtitle">매일 활용하는 실용적 식단 가이드</p>
+        </div>
+        
+        <div class="spectrum-controls">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">전체 보기</button>
+                <button class="filter-tab" data-category="protein">단백질</button>
+                <button class="filter-tab" data-category="fats">지방</button>
+                <button class="filter-tab" data-category="vegetables">채소</button>
+                <button class="filter-tab" data-category="fruits">과일</button>
+                <button class="filter-tab" data-category="dairy">유제품</button>
+                <button class="filter-tab" data-category="others">기타</button>
+            </div>
+            
+            <input type="text" class="search-box" placeholder="식품명을 검색해보세요 (예: 소고기, 아보카도, 올리브오일)">
+            
+            <div class="spectrum-legend">
+                <div class="legend-item">
+                    <div class="legend-color optimal"></div>
+                    <span class="legend-text">최적 (자유롭게 섭취)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color moderate"></div>
+                    <span class="legend-text">적당량 사용</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color avoid"></div>
+                    <span class="legend-text">회피</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- 단백질 카테고리 -->
+            <div class="category-section" data-category="protein">
+                <h2 class="category-title">🥩 단백질</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (자유롭게 섭취)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">소고기</span>
+                            <span class="food-tag">양고기</span>
+                            <span class="food-tag">돼지고기</span>
+                            <span class="food-tag">닭고기</span>
+                            <span class="food-tag">오리고기</span>
+                            <span class="food-tag">연어</span>
+                            <span class="food-tag">정어리</span>
+                            <span class="food-tag">고등어</span>
+                            <span class="food-tag">계란</span>
+                            <span class="food-tag">간</span>
+                            <span class="food-tag">심장</span>
+                            <span class="food-tag">신장</span>
+                        </div>
+                        <div class="level-note">
+                            <strong>육류 선택 가이드:</strong> 양질의 단백질과 포화지방 섭취는 매우 중요합니다. 가능하다면 자연 방목이나 건강한 사료로 키운 육류를 선택하는 것이 더욱 이상적입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">참치 (대형어류)</span>
+                            <span class="food-tag">새우</span>
+                            <span class="food-tag">게</span>
+                            <span class="food-tag">조개류</span>
+                        </div>
+                        <div class="level-note">
+                            대형 어류의 경우 중금속 축적 가능성이 있어 적당량 섭취를 권장합니다. 갑각류는 개인에 따라 알레르기 반응이 있을 수 있습니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">콩류 (콩, 렌틸, 완두콩)</span>
+                            <span class="food-tag">땅콩</span>
+                            <span class="food-tag">퀴노아</span>
+                            <span class="food-tag">가공육 (소시지, 햄)</span>
+                            <span class="food-tag">식물성 고기 대체품</span>
+                        </div>
+                        <div class="level-note">
+                            콩류는 렉틴과 피트산 등 항영양소가 많아 소화 문제를 일으킬 수 있으며, 가공육은 첨가물과 방부제가 포함되어 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 지방 카테고리 -->
+            <div class="category-section" data-category="fats">
+                <h2 class="category-title">🧈 지방</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (자유롭게 섭취)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">동물성 지방 (라드, 우지)</span>
+                            <span class="food-tag">버터</span>
+                            <span class="food-tag">기</span>
+                            <span class="food-tag">코코넛오일</span>
+                            <span class="food-tag">올리브오일 (엑스트라 버진)</span>
+                            <span class="food-tag">아보카도오일</span>
+                            <span class="food-tag">MCT 오일</span>
+                        </div>
+                        <div class="level-note">
+                            안정된 포화지방과 단일불포화지방은 조리 시 산화되지 않아 안전하며, 인체에 필수적인 영양소를 제공합니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">마카다미아 오일</span>
+                            <span class="food-tag">견과류 (마카다미아, 브라질넛)</span>
+                        </div>
+                        <div class="level-note">
+                            견과류는 항영양소 함량을 고려하여 적당량만 섭취하며, 가능하면 불린 후 섭취하는 것이 좋습니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">카놀라유</span>
+                            <span class="food-tag">옥수수유</span>
+                            <span class="food-tag">콩기름</span>
+                            <span class="food-tag">해바라기씨유</span>
+                            <span class="food-tag">포도씨유</span>
+                            <span class="food-tag">마가린</span>
+                            <span class="food-tag">쇼트닝</span>
+                        </div>
+                        <div class="level-note">
+                            산업용 종자유는 오메가-6 지방산 과다와 산화 위험이 높아 염증을 유발할 수 있습니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 채소 카테고리 -->
+            <div class="category-section" data-category="vegetables">
+                <h2 class="category-title">🥬 채소</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (자유롭게 섭취)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">애호박</span>
+                            <span class="food-tag">아스파라거스</span>
+                            <span class="food-tag">아보카도</span>
+                            <span class="food-tag">콜리플라워</span>
+                            <span class="food-tag">브로콜리 (충분히 조리)</span>
+                            <span class="food-tag">양배추</span>
+                            <span class="food-tag">오이 (껍질 제거)</span>
+                        </div>
+                        <div class="level-note">
+                            혈당 부하가 낮고 항영양소 함량이 상대적으로 적은 채소들입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">양파</span>
+                            <span class="food-tag">피망</span>
+                            <span class="food-tag">토마토 (껍질/씨 제거)</span>
+                            <span class="food-tag">시금치 (충분히 조리)</span>
+                            <span class="food-tag">케일 (충분히 조리)</span>
+                            <span class="food-tag">상추류</span>
+                        </div>
+                        <div class="level-note">
+                            <strong>항영양소 주의:</strong> 옥살산, 렉틴 등이 포함되어 있어 충분한 조리나 적절한 처리가 필요합니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">감자</span>
+                            <span class="food-tag">고구마</span>
+                            <span class="food-tag">옥수수</span>
+                            <span class="food-tag">당근 (대량)</span>
+                            <span class="food-tag">비트</span>
+                            <span class="food-tag">파스닙</span>
+                        </div>
+                        <div class="level-note">
+                            녹말 함량이 높아 혈당을 급격히 상승시킬 수 있는 뿌리채소들입니다.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning-note">
+                    <div class="warning-title">중요: 채소 섭취 시 주의사항</div>
+                    모든 식물이 동등하게 건강에 유익한 것은 아닙니다. 항영양소(옥살산, 렉틴, 피트산)의 존재를 고려하여 가급적 충분한 조리(삶기, 찌기, 발효 등)를 통해 안전하게 섭취하는 것이 중요합니다.
+                </div>
+            </div>
+            
+            <!-- 과일 카테고리 -->
+            <div class="category-section" data-category="fruits">
+                <h2 class="category-title">🍓 과일</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (소량)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">블루베리</span>
+                            <span class="food-tag">블랙베리</span>
+                            <span class="food-tag">크랜베리</span>
+                        </div>
+                        <div class="level-note">
+                            옥살산 함량이 낮고 당 함량이 상대적으로 적은 베리류입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">라즈베리</span>
+                            <span class="food-tag">딸기</span>
+                            <span class="food-tag">아보카도</span>
+                        </div>
+                        <div class="level-note">
+                            <strong>베리류 선택 가이드:</strong> 옥살산 함량이 높은 라즈베리, 딸기는 신장 결석 위험이 있는 경우 각별한 주의가 필요합니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">사과</span>
+                            <span class="food-tag">바나나</span>
+                            <span class="food-tag">오렌지</span>
+                            <span class="food-tag">포도</span>
+                            <span class="food-tag">망고</span>
+                            <span class="food-tag">파인애플</span>
+                            <span class="food-tag">과일 주스</span>
+                            <span class="food-tag">말린 과일</span>
+                        </div>
+                        <div class="level-note">
+                            당 함량이 높아 혈당을 급격히 상승시키는 대부분의 과일들입니다. 특히 열대과일과 가공된 과일은 피해야 합니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 유제품 카테고리 -->
+            <div class="category-section" data-category="dairy">
+                <h2 class="category-title">🧀 유제품</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (자유롭게 섭취)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">단단한 숙성 치즈</span>
+                            <span class="food-tag">파르메산 치즈</span>
+                            <span class="food-tag">체다 치즈</span>
+                            <span class="food-tag">고다 치즈</span>
+                            <span class="food-tag">버터</span>
+                            <span class="food-tag">헤비 크림</span>
+                        </div>
+                        <div class="level-note">
+                            발효 과정을 거쳐 유당이 제거되고 유익한 지방과 단백질이 농축된 유제품들입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">그릭 요거트 (무당)</span>
+                            <span class="food-tag">케피어</span>
+                            <span class="food-tag">사워크림</span>
+                        </div>
+                        <div class="level-note">
+                            유당 함량이 낮아진 발효 유제품이지만 개인의 유당 내성도에 따라 조절이 필요합니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">일반 우유</span>
+                            <span class="food-tag">가공 치즈</span>
+                            <span class="food-tag">아이스크림</span>
+                            <span class="food-tag">가당 요거트</span>
+                            <span class="food-tag">식물성 대체 우유</span>
+                        </div>
+                        <div class="level-note">
+                            유당과 첨가당이 많이 포함되어 있거나, 인공 첨가물이 들어간 가공 유제품들입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 기타 카테고리 -->
+            <div class="category-section" data-category="others">
+                <h2 class="category-title">🌿 기타</h2>
+                
+                <div class="food-grid">
+                    <div class="food-level optimal">
+                        <div class="level-header">
+                            <div class="level-icon optimal">✓</div>
+                            <h3 class="level-title optimal">최적 (자유롭게 섭취)</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">소금 (천일염, 히말라야 핑크솔트)</span>
+                            <span class="food-tag">후추</span>
+                            <span class="food-tag">마늘</span>
+                            <span class="food-tag">생강</span>
+                            <span class="food-tag">허브류 (바질, 로즈마리 등)</span>
+                            <span class="food-tag">미네랄 워터</span>
+                            <span class="food-tag">블랙 커피</span>
+                            <span class="food-tag">차 (무가당)</span>
+                        </div>
+                        <div class="level-note">
+                            대사에 부담을 주지 않으면서 풍미를 더하거나 건강상 이점을 제공하는 식품들입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level moderate">
+                        <div class="level-header">
+                            <div class="level-icon moderate">⚡</div>
+                            <h3 class="level-title moderate">적당량 사용</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">에리스리톨</span>
+                            <span class="food-tag">스테비아</span>
+                            <span class="food-tag">몽크프룻</span>
+                            <span class="food-tag">85% 이상 다크 초콜릿</span>
+                            <span class="food-tag">코코아 파우더 (무가당)</span>
+                        </div>
+                        <div class="level-note">
+                            혈당에 미치는 영향이 적은 저탄수화물 감미료와 항산화 성분이 풍부한 고농도 초콜릿입니다.
+                        </div>
+                    </div>
+                    
+                    <div class="food-level avoid">
+                        <div class="level-header">
+                            <div class="level-icon avoid">✗</div>
+                            <h3 class="level-title avoid">회피</h3>
+                        </div>
+                        <div class="food-items">
+                            <span class="food-tag">곡물 (밀, 쌀, 귀리)</span>
+                            <span class="food-tag">콩류 (콩, 렌틸, 땅콩)</span>
+                            <span class="food-tag">설탕</span>
+                            <span class="food-tag">아가베 시럽</span>
+                            <span class="food-tag">고과당 옥수수 시럽</span>
+                            <span class="food-tag">인공 감미료 (아스파탄 등)</span>
+                            <span class="food-tag">청량음료</span>
+                            <span class="food-tag">과자/빵류</span>
+                        </div>
+                        <div class="level-note">
+                            혈당을 급격히 상승시키거나 항영양소를 다량 포함한 가공식품들입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="practical-tips">
+                <h2 class="tips-title">💡 실용적 활용 팁</h2>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <div class="tip-icon">🛒</div>
+                        <div class="tip-text">장보기 전 이 가이드를 참고하여 최적 식품 위주로 구매 목록을 작성하세요</div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon">🍽️</div>
+                        <div class="tip-text">매 끼니 구성 시 최적 카테고리에서 80% 이상 선택하는 것을 목표로 하세요</div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon">📱</div>
+                        <div class="tip-text">의문이 드는 식품이 있으면 검색 기능을 활용해 빠르게 확인하세요</div>
+                    </div>
+                    
+                    <div class="tip-item">
+                        <div class="tip-icon">⏰</div>
+                        <div class="tip-text">처음에는 완벽하지 않아도 괜찮습니다. 점진적으로 개선해 나가세요</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_chapter7.html" class="nav-button">◀ 제7장으로</a>
+            <a href="metabolic_health_contents.html" class="nav-button">목차로</a>
+            <a href="metabolic_health_chapter8.html" class="nav-button">제8장 ▶</a>
+        </div>
+    </div>
+    
+    <script>
+        // 탭 필터링 기능
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const categorySections = document.querySelectorAll('.category-section');
+        
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 모든 탭 비활성화
+                filterTabs.forEach(t => t.classList.remove('active'));
+                // 클릭된 탭 활성화
+                tab.classList.add('active');
+                
+                const category = tab.dataset.category;
+                
+                // 모든 섹션 숨기기
+                categorySections.forEach(section => {
+                    if (category === 'all') {
+                        section.classList.remove('hidden');
+                    } else {
+                        if (section.dataset.category === category) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // 검색 기능
+        const searchBox = document.querySelector('.search-box');
+        
+        searchBox.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const foodTags = document.querySelectorAll('.food-tag');
+            
+            foodTags.forEach(tag => {
+                const foodName = tag.textContent.toLowerCase();
+                
+                if (foodName.includes(searchTerm)) {
+                    tag.style.background = '#ffeb3b';
+                    tag.style.color = '#333';
+                    tag.style.fontWeight = '700';
+                    
+                    // 검색된 항목이 포함된 섹션 보이기
+                    const section = tag.closest('.category-section');
+                    section.classList.remove('hidden');
+                } else {
+                    tag.style.background = '';
+                    tag.style.color = '';
+                    tag.style.fontWeight = '';
+                }
+            });
+            
+            // 검색어가 비어있으면 현재 필터 상태로 복원
+            if (searchTerm === '') {
+                const activeTab = document.querySelector('.filter-tab.active');
+                const category = activeTab.dataset.category;
+                
+                categorySections.forEach(section => {
+                    if (category === 'all') {
+                        section.classList.remove('hidden');
+                    } else {
+                        if (section.dataset.category === category) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

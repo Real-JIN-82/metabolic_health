@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제13장: 장년기 번영과 장수 최적화 (60세 이상)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="longevity" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="3" fill="rgba(255,255,255,0.15)"/><path d="M8,8 Q12,4 16,8 Q12,12 8,8" fill="rgba(255,255,255,0.1)"/><circle cx="12" cy="12" r="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23longevity)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .paragraph {
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            border-bottom: 3px solid #fd79a8;
+            padding-bottom: 15px;
+            margin: 50px 0 30px 0;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #fdcb6e;
+        }
+        
+        .longevity-intro {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(253, 203, 110, 0.3);
+        }
+        
+        .longevity-intro::before {
+            content: '🏆';
+            font-size: 3.5rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+        
+        .intro-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .intro-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2d3436;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .core-principles {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #fdcb6e;
+        }
+        
+        .principles-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .principles-intro {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            color: #636e72;
+        }
+        
+        .key-areas {
+            margin: 40px 0;
+        }
+        
+        .area-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .area-card.protein {
+            border-image: linear-gradient(135deg, #ff7675, #fd79a8) 1;
+        }
+        
+        .area-card.brain {
+            border-image: linear-gradient(135deg, #74b9ff, #0984e3) 1;
+        }
+        
+        .area-card.mobility {
+            border-image: linear-gradient(135deg, #00b894, #00cec9) 1;
+        }
+        
+        .area-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .area-icon {
+            font-size: 4rem;
+            margin-right: 20px;
+        }
+        
+        .area-info {
+            flex: 1;
+        }
+        
+        .area-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .area-subtitle {
+            font-size: 1rem;
+            color: #636e72;
+            font-style: italic;
+        }
+        
+        .area-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .content-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .content-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .content-item {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .content-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #fd79a8;
+            font-weight: bold;
+        }
+        
+        .brain-protection {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(116, 185, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brain-protection::before {
+            content: '🧠';
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+        
+        .brain-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brain-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .framework-completion {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(162, 155, 254, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .framework-completion::before {
+            content: '⚡';
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+        
+        .completion-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .completion-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .longevity-matrix {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #fdcb6e;
+        }
+        
+        .matrix-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .matrix-table {
+            overflow-x: auto;
+        }
+        
+        .matrix-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .matrix-table th {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .matrix-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: top;
+        }
+        
+        .matrix-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .age-range {
+            font-weight: 700;
+            color: #fd79a8;
+            text-align: center;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(162, 155, 254, 0.3);
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .insight-title::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .action-points-title::before {
+            content: '🎯';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .action-points-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-points-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .action-points-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-points-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.8);
+            font-weight: bold;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .summary-title::before {
+            content: '📋';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .navigation {
+            background: #f8f9fa;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background: #fd79a8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #fdcb6e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+        }
+        
+        .navigation span {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .book-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .area-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .area-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .area-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <header class="chapter-header">
+            <div class="part-info">제4부: 생애주기 최적화 가이드</div>
+            <div class="chapter-number">제13장</div>
+            <h1 class="chapter-title">장년기 번영과 장수 최적화</h1>
+            <p class="chapter-subtitle">60세 이상, 지혜와 건강이 만나는 시간</p>
+        </header>
+        
+        <div class="content">
+            <div class="longevity-intro">
+                <div class="intro-title">노년기 건강의 핵심 원칙</div>
+                <div class="intro-content">
+                    젊은 시절 건강의 기틀을 다지고 중년의 위기를 성공적으로 항해하게 해준 바로 그 원칙들이, 길고 건강하며 인지적으로 예리한 노년기를 위한 열쇠가 됩니다. 60세 이후는 새로운 도전의 시작이지만, 올바른 전략으로 이전보다 더 활기찬 삶을 영위할 수 있습니다.
+                </div>
+            </div>
+            
+            <div class="core-principles">
+                <h3 class="principles-title">🎯 장년기 건강 관리의 핵심 원칙</h3>
+                
+                <div class="principles-intro">
+                    노년기 건강 관리는 단순히 질병을 예방하는 것을 넘어, <strong>기능적 독립성과 인지적 예리함을 평생 유지하는 것</strong>이 목표입니다. 이는 나이가 들수록 더욱 중요해지는 세 가지 핵심 영역에 집중함으로써 달성할 수 있습니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">주요 관리 영역</h2>
+            
+            <div class="key-areas">
+                <div class="area-card protein">
+                    <div class="area-header">
+                        <div class="area-icon">💪</div>
+                        <div class="area-info">
+                            <h3 class="area-title">단백동화 저항성 극복</h3>
+                            <p class="area-subtitle">근육량 보존의 최우선 과제</p>
+                        </div>
+                    </div>
+                    
+                    <div class="area-content">
+                        <div class="content-section">
+                            <h4 class="content-title">🔬 생리적 변화</h4>
+                            <ul class="content-list">
+                                <li class="content-item">단백질 합성 반응 둔화</li>
+                                <li class="content-item">근육 단백질 분해 증가</li>
+                                <li class="content-item">아미노산 흡수율 저하</li>
+                                <li class="content-item">염증 수준 증가</li>
+                                <li class="content-item">호르몬 분비 감소</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h4 class="content-title">⚡ 대응 전략</h4>
+                            <ul class="content-list">
+                                <li class="content-item">단백질 섭취량 증량 (2.0-2.5g/kg)</li>
+                                <li class="content-item">류신 풍부한 식품 우선</li>
+                                <li class="content-item">식사별 25-35g 단백질 확보</li>
+                                <li class="content-item">소화 흡수율 높은 동물성 단백질</li>
+                                <li class="content-item">저항성 운동 지속</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="area-card brain">
+                    <div class="area-header">
+                        <div class="area-icon">🧠</div>
+                        <div class="area-info">
+                            <h3 class="area-title">뇌 기능 보호</h3>
+                            <p class="area-subtitle">인지적 예리함의 평생 유지</p>
+                        </div>
+                    </div>
+                    
+                    <div class="area-content">
+                        <div class="content-section">
+                            <h4 class="content-title">⚠️ 위험 요인</h4>
+                            <ul class="content-list">
+                                <li class="content-item">뇌 포도당 대사 저하</li>
+                                <li class="content-item">염증성 손상 축적</li>
+                                <li class="content-item">혈관 건강 악화</li>
+                                <li class="content-item">신경 전달 물질 감소</li>
+                                <li class="content-item">산화 스트레스 증가</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h4 class="content-title">🛡️ 보호 전략</h4>
+                            <ul class="content-list">
+                                <li class="content-item">케톤 연료 공급 (저탄고지)</li>
+                                <li class="content-item">염증 억제 (오메가-3)</li>
+                                <li class="content-item">혈관 건강 최적화</li>
+                                <li class="content-item">지속적인 인지 자극</li>
+                                <li class="content-item">수면 품질 개선</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="area-card mobility">
+                    <div class="area-header">
+                        <div class="area-icon">🚶</div>
+                        <div class="area-info">
+                            <h3 class="area-title">기동성 유지</h3>
+                            <p class="area-subtitle">독립적 생활의 기반</p>
+                        </div>
+                    </div>
+                    
+                    <div class="area-content">
+                        <div class="content-section">
+                            <h4 class="content-title">📉 감소 요인</h4>
+                            <ul class="content-list">
+                                <li class="content-item">관절 유연성 저하</li>
+                                <li class="content-item">균형 감각 둔화</li>
+                                <li class="content-item">골밀도 감소</li>
+                                <li class="content-item">근력 및 지구력 저하</li>
+                                <li class="content-item">반응 속도 느려짐</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h4 class="content-title">🏃 유지 전략</h4>
+                            <ul class="content-list">
+                                <li class="content-item">규칙적인 스트레칭</li>
+                                <li class="content-item">균형 운동 (요가, 태극권)</li>
+                                <li class="content-item">비타민 D 최적화</li>
+                                <li class="content-item">기능적 운동 훈련</li>
+                                <li class="content-item">낙상 예방 환경 조성</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="brain-protection">
+                <div class="brain-title">뇌 보호: 궁극적인 전략</div>
+                <div class="brain-content">
+                    평생에 걸친 케토제닉 경향의 항염증 식단은 뇌에 안정적인 케톤 연료를 공급하고, 염증과 당화 손상을 최소화함으로써 알츠하이머병 및 기타 연령 관련 인지 저하의 위험을 줄이는 궁극적인 전략입니다.
+                </div>
+            </div>
+            
+            <div class="framework-completion">
+                <div class="completion-title">케토 적응의 장기적 이점</div>
+                <div class="completion-content">
+                    젊은 시절부터 시작된 저탄수화물, 고지방 식단은 노년기에 그 진가를 발휘합니다. 뇌가 케톤을 효율적으로 사용하는 데 적응되어 있다면, 나이가 들면서 포도당 대사 능력이 저하되어도 인지 기능을 유지할 수 있습니다. 이는 치매 예방의 가장 강력한 생활습관 개입법입니다.
+                </div>
+            </div>
+            
+            <div class="key-insight">
+                <div class="insight-title">장수와 건강 수명의 차이</div>
+                <p>단순히 오래 사는 것(장수)과 건강하게 오래 사는 것(건강 수명)은 전혀 다릅니다. 우리의 목표는 마지막 순간까지 독립적이고 인지적으로 명료하며 활기찬 삶을 사는 것입니다. 이를 위해서는 근육량, 뇌 기능, 기동성이라는 세 가지 핵심 요소를 모두 관리해야 합니다.</p>
+            </div>
+            
+            <h2 class="section-title">생애주기별 영양 조정 매트릭스</h2>
+            
+            <div class="longevity-matrix">
+                <h3 class="matrix-title">📊 연령대별 핵심 전략 요약</h3>
+                
+                <div class="matrix-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>연령대</th>
+                                <th>주된 대사적 과제</th>
+                                <th>핵심 영양 초점</th>
+                                <th>최우선 생활 습관</th>
+                                <th>특별 고려사항</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="age-range">0-18세</td>
+                                <td>건강한 대사 프로그래밍</td>
+                                <td>뇌/신체 성장을 위한 영양 밀도 (지방, 단백질)</td>
+                                <td>설탕 및 가공식품 회피</td>
+                                <td>평생 미각 형성의 결정적 시기</td>
+                            </tr>
+                            <tr>
+                                <td class="age-range">19-39세</td>
+                                <td>인슐린 감수성 유지</td>
+                                <td>자연 식품 위주의 일관성</td>
+                                <td>규칙적인 운동 습관 형성</td>
+                                <td>'생활 습관병' 방지가 핵심</td>
+                            </tr>
+                            <tr>
+                                <td class="age-range">40-59세</td>
+                                <td>호르몬 변화 대응</td>
+                                <td>엄격한 탄수화물 통제, 단백질 증가</td>
+                                <td>근력 운동 (필수)</td>
+                                <td>갱년기/남성갱년기 적극 대비</td>
+                            </tr>
+                            <tr>
+                                <td class="age-range">60세+</td>
+                                <td>단백동화 저항성, 인지 저하 위험</td>
+                                <td>고품질 단백질, 뇌를 위한 케톤 연료</td>
+                                <td>근육량 및 기동성 유지</td>
+                                <td>독립성과 인지 기능이 최우선</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <p class="paragraph">
+                이 매트릭스는 동일한 핵심 식단의 '우선순위'가 시간에 따라 어떻게 변화하는지를 보여줍니다. 기본 원칙은 변하지 않지만, 각 생애주기의 특별한 도전에 맞춰 강조점이 달라집니다. 60세 이후에는 특히 근육량 보존과 뇌 기능 유지가 가장 중요한 과제가 됩니다.
+            </p>
+            
+            <p class="paragraph">
+                장년기는 인생의 마지막 단계가 아니라, 지혜와 경험이 축적된 가장 풍요로운 시기가 될 수 있습니다. 올바른 영양 전략과 생활 습관을 통해 나이는 숫자에 불과하다는 것을 증명할 수 있습니다. 중요한 것은 완벽함이 아니라 일관성이며, 작은 변화들이 누적되어 만들어내는 놀라운 결과입니다.
+            </p>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-points-list">
+                    <li class="action-points-item">단백질 섭취량을 체중 1kg당 2.0-2.5g으로 증량하고 매 식사마다 균등 분배하기</li>
+                    <li class="action-points-item">근력 운동을 생명 연장 치료법으로 인식하고 주 2-3회 꾸준히 실시하기</li>
+                    <li class="action-points-item">케토제닉 식단으로 뇌에 안정적인 케톤 연료 공급하여 인지 기능 보호하기</li>
+                    <li class="action-points-item">균형 감각과 유연성 훈련을 통해 낙상 위험 최소화하고 기동성 유지하기</li>
+                    <li class="action-points-item">정기적인 건강 검진으로 대사 지표 모니터링하며 조기 개입하기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제13장 핵심 요약</div>
+                <p>장년기 건강의 핵심은 단백동화 저항성 극복, 뇌 보호, 기동성 유지라는 세 가지 영역입니다. 나이가 들수록 더 많은 단백질(2.0-2.5g/kg)과 지속적인 근력 운동이 필요하며, 평생에 걸친 케토제닉 식단은 인지 기능 보호의 최강 전략입니다. 장년기는 인생의 마지막이 아닌 지혜와 건강이 만나는 가장 풍요로운 시기가 될 수 있습니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_chapter12.html" class="nav-button">◀ 제12장</a>
+            <span>제13장 / 총 16장</span>
+            <a href="metabolic_health_chapter14.html" class="nav-button">제14장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

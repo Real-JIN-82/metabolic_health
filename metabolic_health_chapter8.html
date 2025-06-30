@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제8장: 시간제한 섭식(1일 1~2식)의 힘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="clock" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="8" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="10" y1="10" x2="10" y2="5" stroke="rgba(255,255,255,0.15)" stroke-width="1"/><line x1="10" y1="10" x2="14" y2="10" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23clock)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .powerful-intro {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .powerful-intro::before {
+            content: '⏰';
+            font-size: 4rem;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            opacity: 0.3;
+        }
+        
+        .intro-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .intro-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #e67e22;
+        }
+        
+        .paragraph {
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+        
+        .medical-term {
+            color: #f39c12;
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dotted #f39c12;
+            position: relative;
+        }
+        
+        .medical-term:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        .benefit-description {
+            color: #2c3e50;
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+        
+        .insulin-mechanism {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #3498db;
+        }
+        
+        .mechanism-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .mechanism-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .flow-step {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .flow-step::after {
+            content: '⬇';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: #27ae60;
+            font-size: 1.5rem;
+            font-weight: 700;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #27ae60;
+        }
+        
+        .flow-step:last-child::after {
+            display: none;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            color: #2c3e50;
+            font-size: 0.95rem;
+        }
+        
+        .eating-window-timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #9b59b6;
+        }
+        
+        .timeline-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #9b59b6;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .timeline-option {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f4ff 0%, #e8d5ff 100%);
+            border-radius: 15px;
+            border: 2px solid #9b59b6;
+        }
+        
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .timeline {
+            margin: 20px 0;
+        }
+        
+        .timeline-track {
+            height: 30px;
+            border-radius: 15px;
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .omad-timeline .fasting-period {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            width: 80%;
+        }
+        
+        .omad-timeline .eating-period {
+            background: linear-gradient(135deg, #4ecdc4 0%, #26d0ce 100%);
+            width: 20%;
+        }
+        
+        .tmad-timeline .fasting-period {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            width: 67%;
+        }
+        
+        .tmad-timeline .eating-period {
+            background: linear-gradient(135deg, #4ecdc4 0%, #26d0ce 100%);
+            width: 33%;
+        }
+        
+        .timeline-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .autophagy-spotlight {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid #0984e3;
+        }
+        
+        .spotlight-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .spotlight-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #8b5cf6;
+        }
+        
+        .insight-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #7c3aed;
+            margin-bottom: 15px;
+        }
+        
+        .success-strategies {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 3px solid #e74c3c;
+        }
+        
+        .strategies-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .strategy-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .strategy-item {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border: 2px solid #e74c3c;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .strategy-item::before {
+            content: "🎯";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-item::before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: #f39c12;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-button:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mechanism-flow {
+                gap: 15px;
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제3부: 라이프스타일 청사진</div>
+            <div class="chapter-number">제 8 장</div>
+            <h1 class="chapter-title">시간제한 섭식(1일 1~2식)의 힘</h1>
+            <div class="chapter-subtitle">간헐적 단식과 식사 타이밍의 대사적 혁명</div>
+        </div>
+        
+        <div class="content">
+            <div class="powerful-intro">
+                <div class="intro-title">패러다임 전환: 언제 먹느냐가 무엇을 먹느냐만큼 중요하다</div>
+                <div class="intro-content">
+                    음식 섭취를 하루 중 짧은 시간 창으로 집중시키는 시간제한 섭식은 단순한 체중 감량 도구가 아니라, 대사 건강을 근본적으로 개선하는 강력한 치료 도구입니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">시간제한 섭식의 대사적 이점</h2>
+            
+            <p class="paragraph">
+                <span class="medical-term" title="시간제한 섭식(Time-Restricted Eating): 하루 중 특정 시간대에만 음식을 섭취하고 나머지 시간은 단식하는 식사 패턴">시간제한 섭식(Time-Restricted Eating, TRE)</span> 또는 <span class="medical-term" title="간헐적 단식(Intermittent Fasting): 일정한 주기로 단식과 식사를 반복하는 식사 패턴">간헐적 단식(Intermittent Fasting, IF)</span>은 현대 대사 질환의 근본 원인을 해결하는 가장 직접적이고 효과적인 방법 중 하나입니다.
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📉</div>
+                    <h3 class="benefit-title">인슐린 수치 극적 감소</h3>
+                    <p class="benefit-description">
+                        단식 시간을 길게 가짐으로써 하루 평균 인슐린 수치를 극적으로 낮춰 인슐린 저항성의 근본 원인을 해결합니다.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔄</div>
+                    <h3 class="benefit-title">대사 유연성 회복</h3>
+                    <p class="benefit-description">
+                        포도당을 태우고 지방을 저장하는 모드에서, 저장된 지방을 효율적으로 태우는 케톤 생성 모드로 전환됩니다.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧬</div>
+                    <h3 class="benefit-title">세포 자가포식 촉진</h3>
+                    <p class="benefit-description">
+                        장시간의 단식은 세포가 손상된 구성 요소를 분해하고 재활용하는 '세포 청소' 과정을 활성화합니다.
+                    </p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧠</div>
+                    <h3 class="benefit-title">뇌 기능 최적화</h3>
+                    <p class="benefit-description">
+                        케톤체는 포도당보다 더 깨끗하고 효율적인 뇌 연료로, 정신적 명료함과 집중력을 향상시킵니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="insulin-mechanism">
+                <h3 class="mechanism-title">🔬 인슐린 수치 감소의 연쇄 반응</h3>
+                
+                <div class="mechanism-flow">
+                    <div class="flow-step">
+                        <div class="step-title">단식 시간 연장</div>
+                        <div class="step-description">음식 섭취를 짧은 시간으로 제한</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-title">인슐린 수치 급감</div>
+                        <div class="step-description">하루 평균 인슐린 농도 대폭 감소</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-title">인슐린 감수성 회복</div>
+                        <div class="step-description">세포의 인슐린 반응성 정상화</div>
+                    </div>
+                    
+                    <div class="flow-step">
+                        <div class="step-title">지방 연소 모드</div>
+                        <div class="step-description">저장된 체지방을 에너지로 효율적 사용</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="eating-window-timeline">
+                <h3 class="timeline-title">🕐 대표적인 시간제한 섭식 패턴</h3>
+                
+                <div class="timeline-option">
+                    <div class="option-title">1일 1식 (OMAD - One Meal A Day)</div>
+                    <div class="timeline">
+                        <div class="timeline-track omad-timeline">
+                            <div class="fasting-period"></div>
+                            <div class="eating-period"></div>
+                        </div>
+                        <div class="timeline-labels">
+                            <span>단식 19시간</span>
+                            <span>식사창 5시간</span>
+                        </div>
+                    </div>
+                    <p style="color: #6c757d; font-size: 0.9rem; margin-top: 10px;">
+                        가장 강력한 효과를 제공하지만, 영양 결핍을 피하기 위해 영양 밀도가 높은 음식 선택이 필수적입니다.
+                    </p>
+                </div>
+                
+                <div class="timeline-option">
+                    <div class="option-title">1일 2식 (TMAD - Two Meals A Day)</div>
+                    <div class="timeline">
+                        <div class="timeline-track tmad-timeline">
+                            <div class="fasting-period"></div>
+                            <div class="eating-period"></div>
+                        </div>
+                        <div class="timeline-labels">
+                            <span>단식 16시간</span>
+                            <span>식사창 8시간</span>
+                        </div>
+                    </div>
+                    <p style="color: #6c757d; font-size: 0.9rem; margin-top: 10px;">
+                        실용적이고 지속 가능한 접근법으로, 사회생활과 영양 섭취의 균형을 맞추기에 적합합니다.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="autophagy-spotlight">
+                <div class="spotlight-title">세포 자가포식(Autophagy): 몸의 자체 정화 시스템</div>
+                <div class="spotlight-content">
+                    장시간의 단식은 세포 자가포식을 촉진합니다. 이는 세포가 손상된 단백질이나 소기관을 스스로 분해하고 재활용하는 '세포 청소' 과정으로, 노화를 늦추고 질병을 예방하는 데 중요한 역할을 합니다. 이 과정은 음식을 섭취하지 않을 때만 활성화되며, 특히 16시간 이상의 단식에서 현저히 증가합니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">성공적인 실행 전략</h2>
+            
+            <div class="key-insight">
+                <div class="insight-title">고지방 식단의 마법</div>
+                <p>고탄수화물 식단을 하는 사람에게 장시간의 단식은 혈당 변동으로 인해 매우 고통스러울 수 있습니다. 그러나 고지방, 적정 단백질 식단은 강력한 포만감을 제공하여 1일 1식이나 1일 2식을 훨씬 수월하게 만듭니다.</p>
+            </div>
+            
+            <div class="success-strategies">
+                <h3 class="strategies-title">🎯 성공을 위한 핵심 전략</h3>
+                
+                <ul class="strategy-list">
+                    <li class="strategy-item">
+                        <strong>점진적 접근:</strong> 갑자기 1일 1식을 시도하기보다는 12시간 → 16시간 → 20시간 단식으로 점진적으로 늘려가세요.
+                    </li>
+                    
+                    <li class="strategy-item">
+                        <strong>영양 밀도 최우선:</strong> 식사 창 동안에는 반드시 영양 밀도가 높은 음식(고기, 생선, 계란, 채소 등)을 충분히 섭취하세요.
+                    </li>
+                    
+                    <li class="strategy-item">
+                        <strong>충분한 수분과 전해질:</strong> 단식 중에도 물과 전해질(나트륨, 마그네슘, 칼륨) 섭취를 소홀히 하지 마세요.
+                    </li>
+                    
+                    <li class="strategy-item">
+                        <strong>활동 패턴 고려:</strong> 본인의 생활 패턴과 사회활동에 맞춰 식사 창을 설정하여 지속 가능성을 높이세요.
+                    </li>
+                    
+                    <li class="strategy-item">
+                        <strong>몸의 신호 경청:</strong> 과도한 스트레스나 피로감을 느낀다면 단식 시간을 조절하고, 몸이 적응할 시간을 주세요.
+                    </li>
+                </ul>
+            </div>
+            
+            <p class="paragraph">
+                특히 여성의 경우, 호르몬 주기와 스트레스 상태에 따라 단식에 대한 반응이 달라질 수 있으므로, 경직된 규칙보다는 유연한 접근이 중요합니다. 목표는 완벽한 단식이 아니라, 장기적으로 지속 가능한 대사 건강 개선입니다.
+            </p>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">아침 식사를 거르고 첫 식사 시간을 점진적으로 늦춰보기 (12시 → 2시 → 4시)</li>
+                    <li class="action-item">식사 창 동안 영양 밀도 높은 음식으로 충분한 영양 섭취 보장하기</li>
+                    <li class="action-item">단식 중 충분한 수분 섭취와 전해질 균형 유지하기</li>
+                    <li class="action-item">개인의 생활 패턴에 맞는 식사 창 시간대 찾기</li>
+                    <li class="action-item">몸의 반응을 관찰하며 단식 시간을 유연하게 조절하기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제8장 핵심 요약</div>
+                <p>시간제한 섭식은 인슐린 수치를 극적으로 낮춰 인슐린 저항성을 해결하고, 대사 유연성을 회복시키는 강력한 도구입니다. 1일 1-2식 패턴은 세포 자가포식을 촉진하여 노화 방지와 질병 예방 효과를 제공합니다. 성공의 열쇠는 고지방 식단과의 결합, 점진적 접근, 그리고 개인의 생활 패턴에 맞는 유연한 적용입니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_chapter7.html" class="nav-button">◀ 제7장</a>
+            <span>제8장 / 총 16장</span>
+            <a href="metabolic_health_chapter9.html" class="nav-button">제9장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

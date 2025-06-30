@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제1장: 결함 있는 식단-건강 패러다임의 해체</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="science" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="rgba(255,255,255,0.1)"/><path d="M5,15 L15,5" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><path d="M15,15 L5,5" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23science)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .fact-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+        }
+        
+        .fact-box::before {
+            content: "⚠️";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .fact-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 40px 0 25px 0;
+            border-left: 5px solid #3498db;
+            padding-left: 20px;
+        }
+        
+        .subsection-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #34495e;
+            margin: 30px 0 20px 0;
+        }
+        
+        .paragraph {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+            line-height: 1.8;
+        }
+        
+        .medical-term {
+            color: #3498db;
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dotted #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .medical-term:hover {
+            background: #ecf0f1;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        
+        .key-concept {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .key-concept::before {
+            content: "💡";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .key-concept-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #f39c12;
+            position: relative;
+        }
+        
+        .insight-box::before {
+            content: "🔍";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #d68910;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #17a2b8;
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #138496;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            background: white;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #17a2b8;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .action-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .action-item::before {
+            content: "✓";
+            color: #17a2b8;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid #dee2e6;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #495057;
+            text-align: center;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .nav-button:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .fact-box, .key-concept, .insight-box, .action-points {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제1부: 대사적 현실의 토대</div>
+            <div class="chapter-number">제 1 장</div>
+            <h1 class="chapter-title">결함 있는 식단-건강 패러다임의 해체</h1>
+            <div class="chapter-subtitle">현대 영양학의 오해를 벗어나 진실을 찾아가는 여정</div>
+        </div>
+        
+        <div class="content">
+            <div class="fact-box">
+                <div class="fact-title">충격적인 현실</div>
+                <p>40대 여성 유방암 발병률 증가, 50대 남성 심장마비 사망률 상승, 70대 알츠하이머 환자 급증... 이 모든 것이 정말 피할 수 없는 운명일까요? 아니면 우리가 잘못 알고 있는 무언가 때문일까요?</p>
+            </div>
+            
+            <h2 class="section-title">현대 만성 질환의 본질: 필연이 아닌 결과</h2>
+            
+            <p class="paragraph">
+                현대 사회가 직면한 다양한 신체적, 정신적 만성 질환은 피할 수 없는 비극이 아닙니다. 이들은 종종 결함이 있는 영양학적 지침이 낳은 논리적 귀결입니다. 40대 여성이 유방암 진단을 받고, 50대 남편들이 심장마비로 사망하고, 70대 조부모들이 <span class="medical-term" title="알츠하이머병: 뇌의 신경세포가 점진적으로 파괴되어 기억력과 인지 기능이 저하되는 질환">알츠하이머병(Alzheimer's Disease)</span>에 걸리는 현상들을 우리는 당연하게 받아들이고 있습니다.
+            </p>
+            
+            <p class="paragraph">
+                <span class="medical-term" title="대사정신의학: 정신 건강 문제를 뇌의 대사 기능 이상의 관점에서 접근하는 의학 분야">대사정신의학(Metabolic Psychiatry)</span> 전문가인 조지아 에데(Georgia Ede) 박사는 이러한 문제의 근원이 비논리적인 영양학 연구에서 출발했다고 지적하며, 특히 정신 건강 문제가 신체 건강과 마찬가지로 우리가 섭취하는 음식과 깊이 연관되어 있음을 강조합니다.
+            </p>
+            
+            <h3 class="subsection-title">뇌-대사 연결성: 정신 건강의 새로운 접근</h3>
+            
+            <p class="paragraph">
+                에데 박사의 작업이 갖는 가장 중요한 의의 중 하나는 정신 건강을 대사 건강의 관점에서 재조명했다는 점입니다. 우울증, 불안, 주의력 문제, 기분 변화와 같은 정신적 증상들은 뇌 화학의 문제이며, 뇌 화학물질은 우리가 섭취하는 음식으로부터 만들어집니다.
+            </p>
+            
+            <div class="key-concept">
+                <div class="key-concept-title">패러다임의 전환</div>
+                <p>식단을 바꾸는 것은 뇌 화학을 근본적으로 바꿀 수 있는 가장 강력한 방법입니다. 이는 영양을 정신 건강 관리의 핵심 도구로 격상시키는 패러다임의 전환을 의미합니다.</p>
+            </div>
+            
+            <p class="paragraph">
+                우리는 오랫동안 정신 질환을 약물로 치료하는 데 익숙해져 있었고, 영양은 부차적인 요소로 간주했습니다. 그러나 이 새로운 접근법은 뇌 대사의 복잡한 과정을 설명하고 이를 최적화함으로써 정신 건강을 개선할 수 있는 새로운 가능성을 제시합니다.
+            </p>
+            
+            <h3 class="subsection-title">덧셈이 아닌 뺄셈의 힘</h3>
+            
+            <p class="paragraph">
+                건강을 개선하려는 많은 사람들은 "슈퍼푸드"나 영양 보충제를 기존 식단에 추가하는 '덧셈'의 전략을 선호합니다. 이는 쉽고 긍정적으로 느껴지지만, 진정한 건강상의 이점은 종종 '뺄셈'에서 비롯됩니다.
+            </p>
+            
+            <div class="insight-box">
+                <div class="insight-title">진짜 문제의 정체</div>
+                <p>우리 몸에 과도한 염증과 <span class="medical-term" title="산화 스트레스: 체내에서 활성산소가 과도하게 생성되어 세포에 손상을 주는 상태">산화 스트레스</span>를 유발하는 주된 원인은 이미 알려져 있습니다:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>고도로 정제된 탄수화물</li>
+                    <li>정제된 식물성 기름(산업용 종자유)</li>
+                    <li>과도한 알코올과 과식</li>
+                </ul>
+            </div>
+            
+            <p class="paragraph">
+                에데 박사는 이러한 유해 요소를 제거하는 것이 그 어떤 슈퍼푸드를 추가하는 것보다 훨씬 더 강력한 효과를 발휘한다고 주장합니다. 이는 식단 개선의 초점을 무엇을 더 먹을지가 아니라 <strong>무엇을 먹지 말아야 할지</strong>에 맞춰야 함을 시사합니다.
+            </p>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">건강 정보를 접할 때 "상관관계"와 "인과관계"를 구분하여 판단하기</li>
+                    <li class="action-item">새로운 "슈퍼푸드"를 찾기보다는 현재 식단에서 해로운 요소 파악하기</li>
+                    <li class="action-item">정신 건강과 신체 건강을 분리해서 생각하지 않기</li>
+                    <li class="action-item">영양 관련 뉴스를 볼 때 연구 방법론에 대해 의문 가지기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제1장 핵심 요약</div>
+                <p>현대 만성 질환의 급증은 피할 수 없는 운명이 아니라, 잘못된 영양학적 지침의 결과입니다. 진정한 건강 개선은 무언가를 더하는 것이 아니라, 해로운 것을 빼는 데서 시작됩니다. 뇌와 몸은 하나이며, 우리가 먹는 음식이 바로 우리의 정신과 신체 건강을 결정합니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_contents.html" class="nav-button">◀ 목차</a>
+            <span>제1장 / 총 16장</span>
+            <a href="metabolic_health_chapter2.html" class="nav-button">제2장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

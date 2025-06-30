@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제14장: 최적의 하루: 식사 타이밍과 에너지 관리 전략</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #fef7f7 0%, #fff3f3 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(253,121,168,0.15);
+            overflow: hidden;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="daily-pattern" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="17" cy="8" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="8" cy="17" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="17" cy="17" r="1.5" fill="rgba(255,255,255,0.1)"/><path d="M3,12 Q12,3 21,12 Q12,21 3,12" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23daily-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .daily-optimization-intro {
+            background: linear-gradient(135deg, rgba(253,121,168,0.1) 0%, rgba(253,203,110,0.1) 100%);
+            border-left: 5px solid #fd79a8;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .intro-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intro-title::before {
+            content: '🎯';
+            font-size: 1.5rem;
+        }
+        
+        .intro-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 40px 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #fd79a8;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #fdcb6e;
+        }
+        
+        .meal-timing-strategy {
+            background: linear-gradient(135deg, rgba(253,203,110,0.1) 0%, rgba(253,121,168,0.1) 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .strategy-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fd79a8;
+            margin-bottom: 15px;
+        }
+        
+        .strategy-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .medical-term {
+            color: #fd79a8;
+            font-weight: 600;
+            cursor: help;
+            border-bottom: 1px dotted #fd79a8;
+        }
+        
+        .meal-patterns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .pattern-card {
+            background: white;
+            border: 2px solid #fd79a8;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pattern-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+        }
+        
+        .pattern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(253,121,168,0.2);
+        }
+        
+        .pattern-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 10px;
+        }
+        
+        .pattern-schedule {
+            background: rgba(253,203,110,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .pattern-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #5a6c7d;
+        }
+        
+        .paragraph {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .bulletproof-options {
+            background: linear-gradient(135deg, rgba(253,121,168,0.05) 0%, rgba(253,203,110,0.05) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .bulletproof-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 20px;
+        }
+        
+        .option-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .option-item {
+            background: white;
+            border-left: 4px solid #fdcb6e;
+            border-radius: 0 15px 15px 0;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(253,121,168,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .option-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(253,121,168,0.15);
+        }
+        
+        .option-item strong {
+            color: #fd79a8;
+            font-weight: 700;
+        }
+        
+        .daily-routine-framework {
+            background: linear-gradient(135deg, rgba(253,121,168,0.08) 0%, rgba(253,203,110,0.08) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .framework-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .routine-schedule {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .time-block {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(253,121,168,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .time-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(253,121,168,0.15);
+        }
+        
+        .time-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .time-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+        
+        .time-info {
+            flex: 1;
+        }
+        
+        .time-period {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fd79a8;
+        }
+        
+        .time-description {
+            font-size: 1rem;
+            color: #5a6c7d;
+            font-style: italic;
+        }
+        
+        .time-activities {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        
+        .energy-management {
+            background: linear-gradient(135deg, rgba(253,121,168,0.05) 0%, rgba(253,203,110,0.05) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .energy-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .energy-scenarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .scenario-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(253,121,168,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scenario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(253,121,168,0.15);
+        }
+        
+        .scenario-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 10px;
+        }
+        
+        .scenario-solution {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2c3e50;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(162, 155, 254, 0.3);
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .insight-title::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .practical-tips {
+            margin: 30px 0;
+        }
+        
+        .tips-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .tip-card {
+            background: white;
+            border: 2px solid #fdcb6e;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(253,203,110,0.2);
+        }
+        
+        .tip-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .tip-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fd79a8;
+            margin-bottom: 10px;
+        }
+        
+        .tip-content {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2c3e50;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+        
+        .action-points-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .action-points-title::before {
+            content: '🎯';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: rgba(255,255,255,0.8);
+            font-weight: bold;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(253, 121, 168, 0.3);
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .summary-title::before {
+            content: '📋';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .navigation {
+            background: #f8f9fa;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .nav-button {
+            background: #fd79a8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #fdcb6e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+        }
+        
+        .navigation span {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        @media (max-width: 768px) {
+            .book-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .meal-patterns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .energy-scenarios {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .navigation {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <header class="chapter-header">
+            <div class="part-info">제5부: 실생활 적용 가이드</div>
+            <div class="chapter-number">제14장</div>
+            <h1 class="chapter-title">최적의 하루: 식사 타이밍과 에너지 관리 전략</h1>
+            <div class="chapter-subtitle">이론을 현실에 적용하는 실전 가이드</div>
+        </header>
+        
+        <div class="content">
+            <div class="daily-optimization-intro">
+                <div class="intro-title">실생활 적용의 핵심</div>
+                <div class="intro-content">
+                    바쁜 일상 속에서도 대사 건강 원칙을 손쉽게 실천할 수 있도록 구체적이고 현실적인 실행 전략을 제시합니다. 완벽함보다는 지속가능성에 초점을 맞춘 유연한 접근법을 통해 건강한 습관을 자연스럽게 일상에 녹여낼 수 있습니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">기본 식사 루틴: 1일 1~2식 전략</h2>
+            
+            <div class="meal-timing-strategy">
+                <h3 class="strategy-title">🕐 아침 식사 생략의 과학적 근거</h3>
+                <div class="strategy-content">
+                    <p>특별한 에너지 소모가 없는 일반적인 날에는 아침 식사를 생략하여 공복 시간을 확보하고, 인슐린 수치를 안정적으로 유지하는 것을 기본 원칙으로 합니다. 우리 몸은 <span class="medical-term" title="새벽 현상: 새벽 시간에 자연스럽게 발생하는 혈당 상승으로, 몸이 활동을 위한 에너지를 스스로 준비하는 정상적인 생리 현상">'새벽 현상'</span>을 통해 아침 활동에 필요한 에너지를 스스로 공급할 수 있습니다.</p>
+                </div>
+            </div>
+            
+            <div class="meal-patterns">
+                <div class="pattern-card">
+                    <div class="pattern-title">⭐ 1일 1식 (OMAD)</div>
+                    <div class="pattern-schedule">
+                        <strong>단식 20-22시간 | 식사창 2-4시간</strong><br>
+                        예시: 오후 6시-8시 한 번의 충분한 식사
+                    </div>
+                    <div class="pattern-description">
+                        최대 효과를 원하는 경우. 자가포식 극대화와 인슐린 저항성 개선에 가장 강력한 효과. 충분한 영양 섭취가 핵심.
+                    </div>
+                </div>
+                
+                <div class="pattern-card">
+                    <div class="pattern-title">⭐ 1일 2식 (TMAD)</div>
+                    <div class="pattern-schedule">
+                        <strong>단식 16-18시간 | 식사창 6-8시간</strong><br>
+                        예시: 점심 12시, 저녁 6시
+                    </div>
+                    <div class="pattern-description">
+                        가장 실용적이고 지속 가능한 접근법. 사회생활과 영양 섭취의 균형을 맞추기에 적합하며, 대부분의 사람에게 권장.
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">예외 상황 대처법: 전략적 에너지 보충</h2>
+            
+            <p class="paragraph">
+                수험생, 고강도 운동, 중요한 회의나 프레젠테이션 등 평소보다 많은 신체적, 정신적 에너지가 필요한 날에는 전략적인 에너지 보충이 필요합니다. 이때 혈당을 급격히 올리는 탄수화물 대신, 다음과 같은 대안을 활용하는 것이 현명합니다.
+            </p>
+            
+            <div class="bulletproof-options">
+                <h3 class="bulletproof-title">⚡ 스마트 에너지 옵션</h3>
+                <ul class="option-list">
+                    <li class="option-item">
+                        <strong>방탄 커피:</strong> 무가당 커피에 MCT 오일과 버터(또는 기버터)를 섞어 마시면, 뇌에 빠르고 깨끗한 케톤 연료를 공급하여 집중력을 높일 수 있습니다.
+                    </li>
+                    <li class="option-item">
+                        <strong>삶은 계란 2-3개:</strong> 양질의 단백질과 포화지방을 공급하여 안정적인 에너지를 제공하고 포만감을 유지합니다.
+                    </li>
+                    <li class="option-item">
+                        <strong>아보카도 + 올리브 오일:</strong> 건강한 지방을 통한 지속적인 에너지 공급과 뇌 기능 향상을 도모합니다.
+                    </li>
+                    <li class="option-item">
+                        <strong>뼈 육수:</strong> 미네랄과 아미노산이 풍부하여 에너지와 집중력을 높이면서도 단식 상태를 크게 방해하지 않습니다.
+                    </li>
+                </ul>
+            </div>
+            
+            <h2 class="section-title">하루 일과 최적화 가이드</h2>
+            
+            <div class="daily-routine-framework">
+                <h3 class="framework-title">⏰ 최적화된 일일 루틴</h3>
+                
+                <div class="routine-schedule">
+                    <div class="time-block">
+                        <div class="time-header">
+                            <div class="time-icon">🌅</div>
+                            <div class="time-info">
+                                <div class="time-period">오전 6-10시</div>
+                                <div class="time-description">자연스러운 각성과 활력 증진</div>
+                            </div>
+                        </div>
+                        <div class="time-activities">
+                            <strong>권장 활동:</strong> 가벼운 운동(산책, 요가), 충분한 수분 섭취, 햇빛 노출<br>
+                            <strong>피해야 할 것:</strong> 아침 식사, 카페인 과다 섭취
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-header">
+                            <div class="time-icon">☀️</div>
+                            <div class="time-info">
+                                <div class="time-period">오전 10시-오후 2시</div>
+                                <div class="time-description">최고 집중력과 생산성 시간</div>
+                            </div>
+                        </div>
+                        <div class="time-activities">
+                            <strong>활용법:</strong> 중요한 업무나 학습에 집중, 단식으로 인한 명료한 사고력 활용<br>
+                            <strong>에너지 부족 시:</strong> 방탄 커피나 MCT 오일 활용
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-header">
+                            <div class="time-icon">🍽️</div>
+                            <div class="time-info">
+                                <div class="time-period">오후 2-6시</div>
+                                <div class="time-description">첫 번째 식사 권장 시간</div>
+                            </div>
+                        </div>
+                        <div class="time-activities">
+                            <strong>식사 구성:</strong> 고품질 단백질 + 건강한 지방 + 저탄수화물 채소<br>
+                            <strong>목표:</strong> 충분한 영양 섭취로 저녁까지 안정적인 에너지 유지
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-header">
+                            <div class="time-icon">🌆</div>
+                            <div class="time-info">
+                                <div class="time-period">오후 6-8시</div>
+                                <div class="time-description">마지막 식사 또는 유일한 식사</div>
+                            </div>
+                        </div>
+                        <div class="time-activities">
+                            <strong>식사 구성:</strong> 하루 영양 필요량의 대부분을 충족하는 풍성한 식사<br>
+                            <strong>사회생활:</strong> 가족 식사나 저녁 모임 시간으로 활용
+                        </div>
+                    </div>
+                    
+                    <div class="time-block">
+                        <div class="time-header">
+                            <div class="time-icon">🌙</div>
+                            <div class="time-info">
+                                <div class="time-period">오후 8시 이후</div>
+                                <div class="time-description">단식 시작과 회복 모드</div>
+                            </div>
+                        </div>
+                        <div class="time-activities">
+                            <strong>권장 활동:</strong> 휴식, 독서, 가벼운 스트레칭, 수면 준비<br>
+                            <strong>주의사항:</strong> 음식 섭취 중단, 충분한 수분 섭취 유지
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">상황별 에너지 관리 전략</h2>
+            
+            <div class="energy-management">
+                <h3 class="energy-title">💡 특수 상황 대응법</h3>
+                
+                <div class="energy-scenarios">
+                    <div class="scenario-card">
+                        <div class="scenario-title">🎯 시험/중요 업무</div>
+                        <div class="scenario-solution">
+                            MCT 오일 + 커피로 뇌 케톤 연료 공급. 단식으로 인한 높은 집중력과 명료함 활용.
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <div class="scenario-title">🏃 운동 계획</div>
+                        <div class="scenario-solution">
+                            공복 유산소는 지방 연소 극대화. 근력운동 전에는 아미노산 또는 가벼운 단백질 섭취 고려.
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <div class="scenario-title">🤝 사회생활/모임</div>
+                        <div class="scenario-solution">
+                            모임 시간에 맞춰 식사창 조정. 평소보다 단식 시간을 줄이거나 늘려서 유연하게 대응.
+                        </div>
+                    </div>
+                    
+                    <div class="scenario-card">
+                        <div class="scenario-title">😴 컨디션 난조</div>
+                        <div class="scenario-solution">
+                            무리하지 말고 몸의 신호 우선. 필요시 단식 시간 단축하거나 하루 휴식.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-insight">
+                <div class="insight-title">성공의 핵심 원칙</div>
+                <p>완벽함보다는 지속가능성이 중요합니다. 80%의 준수도로도 충분한 건강상 이익을 얻을 수 있습니다. 경직된 규칙보다는 원칙을 이해하고 상황에 맞게 유연하게 적용하는 것이 장기적 성공의 비결입니다.</p>
+            </div>
+            
+            <h2 class="section-title">실천을 위한 핵심 팁</h2>
+            
+            <div class="practical-tips">
+                <h3 class="tips-title">🎯 성공을 위한 실용적 조언</h3>
+                
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <div class="tip-icon">💧</div>
+                        <div class="tip-title">충분한 수분 섭취</div>
+                        <div class="tip-content">
+                            하루 2-3리터의 물과 함께 충분한 전해질(나트륨, 마그네슘, 칼륨) 보충. 저탄수화물 식단에서는 특히 중요.
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">📱</div>
+                        <div class="tip-title">점진적 적응</div>
+                        <div class="tip-content">
+                            갑작스런 변화보다는 12시간 → 16시간 → 20시간 단식으로 점진적으로 늘려가며 몸의 적응을 도움.
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🎵</div>
+                        <div class="tip-title">몸의 신호 경청</div>
+                        <div class="tip-content">
+                            과도한 스트레스나 피로감을 느낀다면 단식 시간을 조절. 여성의 경우 호르몬 주기 고려가 중요.
+                        </div>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <div class="tip-icon">🍽️</div>
+                        <div class="tip-title">영양 밀도 우선</div>
+                        <div class="tip-content">
+                            식사 창 동안에는 반드시 영양 밀도가 높은 음식으로 충분한 영양을 섭취하여 결핍 방지.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">개인의 생활 패턴에 맞는 식사 창 시간대 설정하기 (2시-8시 또는 12시-6시 등)</li>
+                    <li class="action-item">특별한 에너지가 필요한 날을 위한 방탄 커피나 MCT 오일 준비하기</li>
+                    <li class="action-item">하루 일과를 단식 리듬에 맞춰 최적화하여 생산성 극대화하기</li>
+                    <li class="action-item">충분한 수분과 전해질 섭취로 단식 중 컨디션 관리하기</li>
+                    <li class="action-item">상황별 유연한 대응법을 미리 계획하여 지속가능성 높이기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제14장 핵심 요약</div>
+                <p>최적의 하루는 1일 1-2식 패턴을 중심으로 설계됩니다. 아침 단식을 기본으로 하되, 특수 상황에서는 방탄 커피나 MCT 오일로 전략적 에너지 보충을 활용합니다. 완벽함보다는 지속가능성에 초점을 맞춰 개인의 생활 패턴에 맞게 유연하게 적용하는 것이 성공의 핵심입니다. 충분한 수분 섭취와 점진적 적응을 통해 건강한 습관을 자연스럽게 일상에 녹여낼 수 있습니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_chapter13.html" class="nav-button">◀ 제13장</a>
+            <span>제14장 / 총 16장</span>
+            <a href="metabolic_health_chapter15.html" class="nav-button">제15장 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

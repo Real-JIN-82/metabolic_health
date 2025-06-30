@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진짜 건강을 위한 통합적 대사 건강 지침 - 서문</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .book-cover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+        
+        .book-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .book-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+        
+        .author-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 15px 30px;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .author-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .preface-header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #2c3e50;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .preface-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .preface-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .paragraph {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .personal-story {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #f39c12;
+            position: relative;
+        }
+        
+        .personal-story::before {
+            content: "📖";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .story-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #d68910;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        
+        .transformation-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #27ae60;
+            position: relative;
+        }
+        
+        .transformation-box::before {
+            content: "⚡";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .transformation-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #229954;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+        
+        .emphasis {
+            font-weight: 700;
+            color: #e74c3c;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .result-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .result-text {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .mentor-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .mentor-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .mentor-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .mentor-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .mentor-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .mentor-role {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .book-guide {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #6c757d;
+        }
+        
+        .guide-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .roadmap {
+            margin: 30px 0;
+        }
+        
+        .roadmap-item {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 5px solid #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .roadmap-item:nth-child(1) { border-left-color: #3498db; }
+        .roadmap-item:nth-child(2) { border-left-color: #27ae60; }
+        .roadmap-item:nth-child(3) { border-left-color: #f39c12; }
+        .roadmap-item:nth-child(4) { border-left-color: #9b59b6; }
+        .roadmap-item:nth-child(5) { border-left-color: #e74c3c; }
+        
+        .roadmap-part {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .roadmap-content {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+        
+        .final-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .navigation {
+            background: #34495e;
+            color: white;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .nav-button {
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .book-cover {
+                padding: 60px 20px;
+            }
+            
+            .book-title {
+                font-size: 2.2rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mentors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .personal-story, .transformation-box {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="book-cover">
+            <h1 class="book-title">진짜 건강을 위한<br>통합적 대사 건강 지침</h1>
+            <div class="book-subtitle">과학적 근거와 실천 경험이 만나 완성된 평생 건강 로드맵</div>
+            <div class="author-badge">실천자의 진솔한 경험담과 과학적 통찰</div>
+        </div>
+        
+        <div class="preface-header">
+            <h2 class="preface-title">서문</h2>
+            <div class="preface-subtitle">저의 솔직한 경험과 이 책을 쓰는 이유</div>
+        </div>
+        
+        <div class="content">
+            <p class="paragraph">
+                이 책을 읽고 계신 당신께, 먼저 제 이야기를 솔직하게 들려드리고 싶습니다.
+            </p>
+            
+            <div class="personal-story">
+                <div class="story-title">절망에서 희망으로: 한 개인의 대사 건강 여정</div>
+                <p class="paragraph">
+                    30대 전후, 사회생활과 함께 제 몸무게는 꾸준히 늘어 2018년 초에는 80kg 초반에 이르렀습니다. 세상에 알려진 통상적인 방법으로 74kg까지 감량하며 '이제 됐다'고 안도했던 순간도 잠시, 2019년 둘째 아이의 임신과 함께 바뀐 생활 패턴은 어김없이 요요를 불러왔습니다.
+                </p>
+                
+                <p class="paragraph">
+                    그 후로 체중은 다시 80kg을 넘어섰고, 2023년 하반기에는 걷잡을 수 없이 무너져 결국 <span class="emphasis">90kg이라는 숫자</span>를 마주하게 되었습니다. 15년간 달고 살았던 역류성 식도염은 일상이 되었고, 2020년에는 고지혈증 진단을 받고 스타틴을 복용하기 시작했습니다.
+                </p>
+            </div>
+            
+            <div class="transformation-box">
+                <div class="transformation-title">2023년 10월, 모든 것을 바꾼 발견</div>
+                <p class="paragraph">
+                    절망적이었던 2023년 10월, 우연히 접한 유튜브 콘텐츠 하나가 제 삶을 송두리째 바꾸어 놓았습니다. 그것은 <span class="emphasis">'덜 먹고 더 움직여라'</span>는 칼로리 계산법에서 벗어나, 우리의 건강 시스템이 무너지는 근본 원인이 <span class="emphasis">'대사 체계의 붕괴'</span>에 있다는 충격적인 진실을 알려주었습니다.
+                </p>
+                
+                <p class="paragraph">
+                    '다이어트과학자 최겸', '닥터조(환자혁명)', 그리고 종착지였던 '닥터쓰리' 채널에 이르기까지, 저는 기존의 상식과 전혀 다른 패러다임을 접하며 진실을 향한 탐닉을 시작했습니다.
+                </p>
+            </div>
+            
+            <p class="paragraph">
+                그 과정에서 저는 콜레스테롤과 LDL이 세상의 잘못된 프레임에 갇힌 억울한 피해자이며, 스타틴이 코큐텐 합성을 방해하는 등 수많은 부작용을 가질 수 있다는 사실을 이해하게 되었습니다. 저는 확신을 갖고 스타틴 복용을 중단했고, 식단과 생활 습관을 바꾸자 <span class="emphasis">15년 된 역류성 식도염은 거짓말처럼 사라졌습니다.</span>
+            </p>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number">30-40일</div>
+                    <div class="result-text">단 기간 만에<br>8kg 감량</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">15년</div>
+                    <div class="result-text">역류성 식도염<br>완전 해결</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">0</div>
+                    <div class="result-text">별도 운동 없이<br>자연스러운 변화</div>
+                </div>
+            </div>
+            
+            <p class="paragraph">
+                패러다임이 전환되자, 실천은 놀랍도록 쉬웠습니다. 10월 둘째 주부터 11월 중하순까지, 별도의 운동 없이 단 30~40일 만에 8kg이 빠졌습니다. 스트레스를 받으며 무언가를 극도로 절제한 것이 아니었습니다.
+            </p>
+            
+            <div class="transformation-box">
+                <div class="transformation-title">진정한 변화의 비결</div>
+                <p class="paragraph">
+                    비결은 간단했습니다. 제가 이미 좋아하던 습관(지방이 많은 고기를 즐기는 것)이 사실은 건강에 좋은 것이었음을 깨닫고, 여기에 집중하는 것. 그리고 과거에는 사랑했지만 이제는 그 해로운 기전을 명확히 이해하게 된 음식들(라면, 튀김, 피자 등)은 자연스레 더 이상 당기지 않게 되었습니다.
+                </p>
+            </div>
+            
+            <p class="paragraph">
+                결국 핵심은 이것이었습니다. <span class="emphasis">진짜 건강에 좋은 것과 좋지 않은 것을 명확히 구분하고, '왜' 그런지에 대한 깊은 이해를 바탕으로, 좋은 것은 집중적으로 하고 안 좋은 것만 멀리하는 것.</span>
+            </p>
+            
+            <div class="mentor-section">
+                <div class="mentor-title">진실로 가는 길을 밝혀준 멘토들</div>
+                <p style="margin-bottom: 25px;">물론, 수많은 거짓 정보가 판치는 세상에서 진실을 가려내는 것은 어려운 일입니다. 하지만 저는 이제 걱정 없습니다. 저에게는 진실로 가는 길을 밝혀주는 멘토들이 있기 때문입니다.</p>
+                
+                <div class="mentors-grid">
+                    <div class="mentor-card">
+                        <div class="mentor-name">다이어트과학자 최겸</div>
+                        <div class="mentor-role">과학적 접근의 시작</div>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-name">닥터조(환자혁명)</div>
+                        <div class="mentor-role">의학적 관점의 전환</div>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-name">닥터쓰리</div>
+                        <div class="mentor-role">실천적 지혜의 종착지</div>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-name">조지아 에데 박사</div>
+                        <div class="mentor-role">과학적 날개의 완성</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="paragraph">
+                최근에 접하게 된 조지아 에데 박사의 '식단 혁명'은 이 모든 여정의 화룡점정이었습니다. 제가 신뢰하는 멘토들이 추천하고, 제가 학습한 내용과 정확히 궤를 같이하는 이 책을 통해, 저는 제 경험적 확신에 강력한 과학적 날개를 달 수 있었습니다.
+            </p>
+            
+            <div class="book-guide">
+                <div class="guide-title">이 책을 어떻게 활용할 것인가</div>
+                
+                <p class="paragraph">
+                    이 책은 단순한 정보 전달을 넘어, 당신이 평생에 걸쳐 건강을 유지하고 최적화할 수 있는 <span class="emphasis">실용적인 도구</span>가 되도록 설계되었습니다. 각 장은 독립적으로도 가치가 있지만, 전체적으로는 하나의 통합된 시스템을 형성합니다.
+                </p>
+                
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <div class="roadmap-part">제1부: 대사적 현실의 토대</div>
+                        <div class="roadmap-content">기존 영양학의 문제점을 파악하고, 인슐린 저항성과 만성 염증이라는 핵심 개념을 이해합니다. 여기서 얻은 지식이 모든 실천의 과학적 근거가 됩니다.</div>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-part">제2부: 최적의 인간 식단</div>
+                        <div class="roadmap-content">동물성 영양소의 우위성과 식물성 식품의 올바른 선택법을 배웁니다. 실용적인 식품 스펙트럼 가이드로 일상의 식단 선택이 명확해집니다.</div>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-part">제3부: 라이프스타일 청사진</div>
+                        <div class="roadmap-content">시간제한 섭식과 개인화 전략을 통해 이론을 실제 생활에 적용하는 방법을 익힙니다. 당신의 생활 패턴에 맞는 유연한 접근법을 찾을 수 있습니다.</div>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-part">제4부: 생애주기 최적화 가이드</div>
+                        <div class="roadmap-content">성장기부터 노년기까지, 각 생애주기의 특별한 도전에 맞춘 맞춤형 전략을 제공합니다. 특히 갱년기 여성을 위한 상세한 가이드가 포함되어 있습니다.</div>
+                    </div>
+                    
+                    <div class="roadmap-item">
+                        <div class="roadmap-part">제5부: 실생활 적용 가이드</div>
+                        <div class="roadmap-content">외식, 회식, 여행 등 현실적인 상황에서의 대처법과 건강한 일상 루틴 구축 방법을 제시합니다. 이론을 지속 가능한 실천으로 바꾸는 핵심 파트입니다.</div>
+                    </div>
+                </div>
+                
+                <p class="paragraph">
+                    <strong>추천 활용법:</strong> 먼저 1-2부를 통해 기초를 탄탄히 한 후, 당신의 현재 상황(나이, 건강 상태, 생활 패턴)에 가장 관련 있는 파트를 집중적으로 읽어보세요. 그 다음 5부의 실생활 가이드로 즉시 적용 가능한 변화를 시작하세요.
+                </p>
+            </div>
+            
+            <p class="paragraph">
+                그래서 이 책을 썼습니다. 조지아 에데 박사의 깊이 있는 연구에 제가 직접 부딪히고 깨달은 지식과 경험을 녹여, 진짜 건강을 탐구하고 되찾고 싶어 하는 소중한 사람들에게 도움이 되기를 바라는 마음으로 말입니다.
+            </p>
+            
+            <div class="final-message">
+                <strong>이 책이 부디 당신의 건강 여정에 든든한 동반자가 되어주기를 진심으로 바랍니다.</strong><br><br>
+                당신의 변화와 성공을 마음 깊이 응원하며,<br>
+                건강한 삶을 향한 첫걸음을 함께 내딛어요.
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <a href="metabolic_health_contents.html" class="nav-button">목차로 이동하기 ▶</a>
+        </div>
+    </div>
+</body>
+</html>

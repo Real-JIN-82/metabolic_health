@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제10장: '조용한 식단' 스펙트럼 - 개인화를 위한 프레임워크</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 20px;
+        }
+        
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="spectrum" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="15" cy="15" r="2" fill="rgba(255,255,255,0.15)"/><circle cx="20" cy="5" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23spectrum)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .part-info {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+        }
+        
+        .chapter-number {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-title {
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        .personalization-intro {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.05) 100%);
+            border-left: 4px solid #f39c12;
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin-bottom: 40px;
+        }
+        
+        .intro-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        
+        .intro-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f39c12;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e67e22;
+        }
+        
+        .paragraph {
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+        
+        .medical-term {
+            color: #f39c12;
+            font-weight: 600;
+            border-bottom: 2px dotted #f39c12;
+            cursor: help;
+        }
+        
+        .quiet-diet-spectrum {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(230, 126, 34, 0.02) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .spectrum-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .diet-options {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .diet-option {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .diet-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .paleo {
+            border-left: 5px solid #27ae60;
+        }
+        
+        .keto {
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .carnivore {
+            border-left: 5px solid #8e44ad;
+        }
+        
+        .option-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .option-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+        
+        .option-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .option-subtitle {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .option-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .option-features {
+            margin-bottom: 20px;
+        }
+        
+        .features-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-item {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .feature-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        
+        .option-suitability {
+            background: rgba(243, 156, 18, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .personalization-key {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(46, 204, 113, 0.05) 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .personalization-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .personalization-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+        
+        .discovery-plan {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.05) 0%, rgba(230, 126, 34, 0.02) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .plan-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .plan-phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.2);
+        }
+        
+        .phase-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+        
+        .phase-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 20px 0 10px 0;
+        }
+        
+        .phase-duration {
+            font-size: 0.9rem;
+            color: #f39c12;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .phase-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #555;
+        }
+        
+        .key-insight {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.05) 100%);
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .insight-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .special-consideration {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(142, 68, 173, 0.05) 100%);
+            border: 2px solid #9b59b6;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .consideration-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        
+        .consideration-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .action-points {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .action-points-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .action-list {
+            list-style: none;
+        }
+        
+        .action-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .action-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .chapter-summary {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.05) 100%);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+        
+        .navigation {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .nav-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .book-container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .chapter-header {
+                padding: 40px 20px;
+            }
+            
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            .navigation {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .plan-phases {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .option-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .option-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <div class="chapter-header">
+            <div class="part-info">제3부 라이프스타일 청사진</div>
+            <div class="chapter-number">제10장</div>
+            <div class="chapter-title">'조용한 식단' 스펙트럼</div>
+            <div class="chapter-subtitle">개인화를 위한 프레임워크</div>
+        </div>
+        
+        <div class="content">
+            <div class="personalization-intro">
+                <div class="intro-title">개인 맞춤형 접근법의 필요성</div>
+                <div class="intro-content">
+                    모든 사람에게 완벽하게 맞는 단 하나의 식단은 존재하지 않습니다. 개인의 유전, 건강 상태, 선호도, 생활 방식에 따라 최적의 식단은 달라질 수 있습니다. 따라서 장기적인 성공을 위해서는 개인화된 접근이 필수적입니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">'조용한 식단(Quiet Diet)' 개념</h2>
+            
+            <p class="paragraph">
+                에데 박사는 이러한 개인차를 수용하기 위해 세 가지 유연한 템플릿을 제안합니다. 이는 <span class="medical-term" title="조용한 식단(Quiet Diet): 장, 갑상선, 미토콘드리아, 면역계에 가해지는 스트레스를 최소화하도록 특별히 변형된 식단">'조용한 식단(Quiet Diet)'</span> 접근법으로, 단순히 탄수화물만 제한하는 것이 아니라 장, 갑상선, 미토콘드리아, 면역계에 가해지는 스트레스를 최소화하도록 특별히 변형된 식단입니다.
+            </p>
+            
+            <p class="paragraph">
+                이 접근법은 표준적인 팔레오나 케토 식단에 잘 반응하지 않았던 민감한 사람들에게 특히 유용합니다. 각 개인의 생물학적 개성을 존중하면서도, 대사 건강 개선이라는 공통된 목표를 달성할 수 있도록 설계되었습니다.
+            </p>
+            
+            <div class="quiet-diet-spectrum">
+                <h3 class="spectrum-title">🌈 조용한 식단의 3가지 스펙트럼</h3>
+                
+                <div class="diet-options">
+                    <div class="diet-option paleo">
+                        <div class="option-header">
+                            <div class="option-icon">🌱</div>
+                            <div>
+                                <div class="option-title">조용한 팔레오 식단</div>
+                                <div class="option-subtitle">Quiet Paleo Diet</div>
+                            </div>
+                        </div>
+                        
+                        <p class="option-description">
+                            곡물, 콩류, 유제품, 가공식품을 배제하는 것을 기본으로 하되, 대사 건강에 미치는 영향이 적은 일부 뿌리채소나 과일을 허용하여 좀 더 온건한 탄수화물 제한을 추구합니다.
+                        </p>
+                        
+                        <div class="option-features">
+                            <div class="features-title">주요 특징:</div>
+                            <ul class="features-list">
+                                <li class="feature-item">곡물과 콩류 완전 제거</li>
+                                <li class="feature-item">자연 상태의 고구마, 단호박 등 허용</li>
+                                <li class="feature-item">베리류와 일부 저당 과일 포함</li>
+                                <li class="feature-item">발효 유제품 선택적 포함</li>
+                                <li class="feature-item">하루 탄수화물 50-100g 수준</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="option-suitability">
+                            <strong>적합한 사람:</strong> 운동량이 많거나, 극도로 낮은 탄수화물에 적응하기 어려운 사람, 사회적 식사가 빈번한 사람
+                        </div>
+                    </div>
+                    
+                    <div class="diet-option keto">
+                        <div class="option-header">
+                            <div class="option-icon">🔥</div>
+                            <div>
+                                <div class="option-title">조용한 케토제닉 식단</div>
+                                <div class="option-subtitle">Quiet Ketogenic Diet</div>
+                            </div>
+                        </div>
+                        
+                        <p class="option-description">
+                            탄수화물 섭취를 매우 엄격하게 제한하여 신체가 주 에너지원으로 케톤을 사용하도록 유도합니다. 특히 뇌 건강과 정신 증상 개선에 강력한 효과를 기대할 수 있습니다.
+                        </p>
+                        
+                        <div class="option-features">
+                            <div class="features-title">주요 특징:</div>
+                            <ul class="features-list">
+                                <li class="feature-item">일일 탄수화물 20g 이하로 제한</li>
+                                <li class="feature-item">지방 비율 70-75% 유지</li>
+                                <li class="feature-item">중간사슬지방산(MCT) 활용</li>
+                                <li class="feature-item">케톤 수치 모니터링</li>
+                                <li class="feature-item">엄격한 과일 제한</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="option-suitability">
+                            <strong>적합한 사람:</strong> 신경계 질환이나 정신적 증상이 있는 사람, 빠른 체중 감량이 필요한 사람, 안정적인 일상이 가능한 사람
+                        </div>
+                    </div>
+                    
+                    <div class="diet-option carnivore">
+                        <div class="option-header">
+                            <div class="option-icon">🥩</div>
+                            <div>
+                                <div class="option-title">조용한 카니보어 식단</div>
+                                <div class="option-subtitle">Quiet Carnivore Diet</div>
+                            </div>
+                        </div>
+                        
+                        <p class="option-description">
+                            동물성 식품만을 섭취하는 가장 제한적인 접근법입니다. 소화계 질환이나 자가면역 질환처럼 식물성 식품에 극도로 민감한 사람들을 위한 치료적 접근법으로 활용됩니다.
+                        </p>
+                        
+                        <div class="option-features">
+                            <div class="features-title">주요 특징:</div>
+                            <ul class="features-list">
+                                <li class="feature-item">모든 식물성 식품 제거</li>
+                                <li class="feature-item">동물성 식품만 섭취</li>
+                                <li class="feature-item">내장육 포함 권장</li>
+                                <li class="feature-item">최소한의 조미료 사용</li>
+                                <li class="feature-item">단계적 확장 가능</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="option-suitability">
+                            <strong>적합한 사람:</strong> 심각한 소화계 질환, 자가면역 질환, 식품 알레르기가 있는 사람, 다른 접근법에 실패한 경험이 있는 사람
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="personalization-key">
+                <div class="personalization-title">🎯 개인화의 핵심</div>
+                <div class="personalization-content">
+                    완벽한 식단은 없지만, 당신에게 맞는 식단은 존재합니다. 궁극적인 목표는 '건강하면서도 충분히 즐길 수 있는' 지속 가능한 식단을 찾는 것입니다.
+                </div>
+            </div>
+            
+            <h2 class="section-title">8주간 발견 계획</h2>
+            
+            <div class="discovery-plan">
+                <h3 class="plan-title">🗓️ 체계적인 자기 실험 프로토콜</h3>
+                
+                <div class="plan-phases">
+                    <div class="phase-card">
+                        <div class="phase-number">1</div>
+                        <h4 class="phase-title">기준선 설정</h4>
+                        <p class="phase-duration">1-2주</p>
+                        <p class="phase-description">
+                            현재 식단을 그대로 유지하며 증상, 에너지 수준, 수면의 질, 기분을 일기로 기록합니다. 혈액 검사를 통해 객관적 지표를 측정합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="phase-card">
+                        <div class="phase-number">2</div>
+                        <h4 class="phase-title">조용한 팔레오 시작</h4>
+                        <p class="phase-duration">2-3주</p>
+                        <p class="phase-description">
+                            가장 온건한 접근법부터 시작합니다. 곡물과 가공식품을 제거하되, 자연 상태의 탄수화물은 적당량 유지하며 변화를 관찰합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="phase-card">
+                        <div class="phase-number">3</div>
+                        <h4 class="phase-title">조용한 케토 전환</h4>
+                        <p class="phase-duration">2-3주</p>
+                        <p class="phase-description">
+                            팔레오에서 만족스러운 결과를 얻지 못했다면, 탄수화물을 더욱 제한하여 케토시스 상태로 전환합니다. 케톤 수치와 증상 변화를 면밀히 기록합니다.
+                        </p>
+                    </div>
+                    
+                    <div class="phase-card">
+                        <div class="phase-number">4</div>
+                        <h4 class="phase-title">최적화 및 개인화</h4>
+                        <p class="phase-duration">2주</p>
+                        <p class="phase-description">
+                            가장 효과적이었던 접근법을 기반으로 미세 조정을 진행합니다. 개인의 라이프스타일과 선호도를 고려하여 지속 가능한 형태로 완성합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-insight">
+                <div class="insight-title">핵심 원칙</div>
+                <p>이 보고서에서 제시된 원칙과 생체 지표들을 가이드 삼아 스스로의 건강 탐정이 되어보세요. 객관적 데이터(혈액 검사, 체중, 체성분)와 주관적 경험(에너지, 기분, 수면)을 모두 고려하여 최적의 접근법을 찾아가는 것이 중요합니다.</p>
+            </div>
+            
+            <h2 class="section-title">특별 고려사항: 저체중 개인을 위한 지침</h2>
+            
+            <div class="special-consideration">
+                <div class="consideration-title">유연한 적용의 필요성</div>
+                <div class="consideration-content">
+                    본 보고서의 원칙은 주로 대사 건강 개선과 체중 관리에 초점을 맞추고 있지만, 체중 증가가 필요한 저체중 개인에게는 유연한 적용이 필요합니다. 이 경우, 대사 지표(공복 인슐린, TG:HDL 비율 등)를 면밀히 관찰하면서 베리류 외에 다른 저혈당 과일을 한시적으로 식단에 포함하는 것을 고려해볼 수 있습니다. 이는 건강한 체중 증가를 목표로 하는 전략적 예외로, 무분별한 탄수화물 섭취가 아닌, 영양 밀도가 높은 자연 식품 내에서 선택하는 것이 중요합니다.
+                </div>
+            </div>
+            
+            <p class="paragraph">
+                개인화는 완벽함을 추구하는 것이 아니라, 각자의 상황에서 최선의 선택을 하는 것입니다. 80%의 준수도로도 충분한 건강상 이익을 얻을 수 있으며, 지속가능성이 완벽함보다 훨씬 더 중요합니다. 스트레스 없이 장기간 유지할 수 있는 식단이야말로 진정으로 성공적인 식단입니다.
+            </p>
+            
+            <div class="action-points">
+                <div class="action-points-title">이 장에서 실천할 수 있는 것들</div>
+                <ul class="action-list">
+                    <li class="action-item">8주간 체계적인 자기 실험을 통해 개인에게 최적화된 식단 찾기</li>
+                    <li class="action-item">증상, 에너지, 기분, 수면의 질을 매일 기록하여 객관적 평가하기</li>
+                    <li class="action-item">혈액 검사를 통해 대사 지표 변화를 과학적으로 추적하기</li>
+                    <li class="action-item">사회생활과 개인 선호도를 고려한 현실적인 식단 구성하기</li>
+                    <li class="action-item">완벽함보다는 지속가능성에 초점을 맞춘 장기적 관점 갖기</li>
+                </ul>
+            </div>
+            
+            <div class="chapter-summary">
+                <div class="summary-title">제10장 핵심 요약</div>
+                <p>개인화된 접근법이 장기적 성공의 열쇠입니다. 조용한 팔레오, 케토, 육식 식단의 3가지 스펙트럼은 각자의 생물학적 개성에 맞는 최적의 접근법을 찾기 위한 프레임워크입니다. 8주간의 체계적인 자기 실험을 통해 객관적 데이터와 주관적 경험을 종합하여 지속 가능한 개인 맞춤형 식단을 완성할 수 있습니다. 완벽함보다는 일관성과 지속가능성이 더 중요합니다.</p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-button" onclick="location.href='metabolic_health_chapter9.html'">◀ 제9장</button>
+            <span>제10장 / 총 16장</span>
+            <button class="nav-button" onclick="location.href='metabolic_health_chapter11.html'">제11장 ▶</button>
+        </div>
+    </div>
+</body>
+</html> 
